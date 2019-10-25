@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mburl <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: abenton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/04 15:04:48 by mburl             #+#    #+#             */
-/*   Updated: 2019/09/11 15:37:44 by mburl            ###   ########.fr       */
+/*   Created: 2019/09/11 13:20:04 by abenton           #+#    #+#             */
+/*   Updated: 2019/09/17 14:23:21 by abenton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,24 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	char	*src_c;
-	char	*dst_c;
-	size_t	i;
+	size_t				i;
+	const unsigned char	*source;
+	unsigned char		*dest;
 
-	if (src == dst)
+	i = 0;
+	if (dst == src)
 		return (dst);
-	src_c = (char *)src;
-	dst_c = (char *)dst;
-	if (src < dst)
+	dest = (unsigned char*)dst;
+	source = (unsigned char*)src;
+	if (source < dest)
 	{
-		i = len;
-		while (i-- > 0)
-			dst_c[i] = src_c[i];
+		while (++i <= len)
+			dest[len - i] = source[len - i];
 	}
 	else
 	{
-		i = 0;
-		while (i < len)
-		{
-			dst_c[i] = src_c[i];
-			i++;
-		}
+		while (len-- > 0)
+			*(dest++) = *(source++);
 	}
 	return (dst);
 }

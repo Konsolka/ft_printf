@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mburl <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: abenton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/04 22:52:25 by mburl             #+#    #+#             */
-/*   Updated: 2019/09/04 23:01:05 by mburl            ###   ########.fr       */
+/*   Created: 2019/09/12 18:45:29 by abenton           #+#    #+#             */
+/*   Updated: 2019/09/17 14:51:18 by abenton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 char	*ft_strtrim(char const *s)
 {

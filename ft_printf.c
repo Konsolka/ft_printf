@@ -6,33 +6,13 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 13:49:30 by mburl             #+#    #+#             */
-/*   Updated: 2019/10/22 13:05:25 by mburl            ###   ########.fr       */
+/*   Updated: 2019/10/25 11:52:49 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "libft/libft.h"
 #include "ft_printf.h"
-
-/*
-**	trying to write % parcer to the t_holder struct
-**	should somehow parce string for example -lld to fields in t_holder fields
-*/
-t_holder		*parse_field(char *str)
-{
-	t_holder	*node;
-	int			i;
-
-	i = 0;
-	node = (t_holder *)malloc(sizeof(*node));
-	while (str[i])
-	{
-		if (str[i] == '-' || str[i] == '+' || str[i] == ' ' || str[i] == '0' ||
-		str[i] == '#')
-			node->flag = str[i];
-		if (s)
-	}
-}
 
 /*
 **	gets what is going after %
@@ -72,6 +52,11 @@ int		ft_printf(const char * restrict format, ...)
 	{
 		if (format[i] != '%')
 			ft_putchar(format[i++]);
+		else if (format[i] == '%' && format[i + 1] == '%')
+		{
+			ft_putchar(format[i]);
+			i += 2;
+		}
 		else
 		{
 			field = handle_format(format, &i);

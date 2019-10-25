@@ -3,22 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: abenton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/22 11:07:13 by mburl             #+#    #+#             */
-/*   Updated: 2019/10/22 12:28:04 by mburl            ###   ########.fr       */
+/*   Created: 2019/10/23 14:46:40 by abenton           #+#    #+#             */
+/*   Updated: 2019/10/23 16:16:10 by abenton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include <stdio.h>
-
-int		ft_printf(const char * restrict format, ...);
+#include "ft_printf.h"
 
 int		main(void)
 {
-	printf("%-ll%", 234);
-
+	ft_printf("kecre%dfiosve", 12);
 	return (0);
 }
-

@@ -3,24 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: abenton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/22 11:37:38 by mburl             #+#    #+#             */
-/*   Updated: 2019/10/22 12:06:02 by mburl            ###   ########.fr       */
+/*   Created: 2019/10/21 15:46:33 by abenton           #+#    #+#             */
+/*   Updated: 2019/10/23 18:22:40 by abenton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#define FT_PRINTF_H
 
-typedef struct	s_holder
+# include "libft/libft.h"
+# include <stdarg.h> // макросы для поддержания переменного числа аргументов
+
+/*
+ * Структура для флагов
+ */
+
+typedef struct	s_flags
 {
-	char	*param;
-	char	flag;
-	char	*width;
-	char	*precision;
-	char	length[2];
-	char	type;
-}				t_holder;
+	int			zero;
+	int			minus;
+	int			plus;
+	int			space;
+	int			hashh;
+	int			width;
+	int			precision;
+	int			lengthh;
+}				t_flags;
+
+int		ft_printf(const char *restrict format, ...);
+int     kek(int fd, char *str, va_list args, int nbr);
 
 #endif
