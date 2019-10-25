@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 11:07:13 by mburl             #+#    #+#             */
-/*   Updated: 2019/10/22 12:28:04 by mburl            ###   ########.fr       */
+/*   Updated: 2019/10/25 12:47:24 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ int		ft_printf(const char * restrict format, ...);
 
 int		main(void)
 {
-	printf("%-ll%", 234);
-
+	ft_printf("%-lld", 234);
 	return (0);
 }
 

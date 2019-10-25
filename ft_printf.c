@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 13:49:30 by mburl             #+#    #+#             */
-/*   Updated: 2019/10/22 13:05:25 by mburl            ###   ########.fr       */
+/*   Updated: 2019/10/25 12:48:17 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,34 @@
 */
 t_holder		*parse_field(char *str)
 {
-	t_holder	*node;
-	int			i;
+	t_holder	*fields;
+	t_flags		*flags;
+	t_length	*length;
+	int 	i;
 
+	ft_set_flags_to_zero(&flags);
+	ft_set_len_to_zero(&length);
 	i = 0;
-	node = (t_holder *)malloc(sizeof(*node));
+	if (str[ft_strlen(str) - 1] == '%')
+	{
+		ft_putchar('%');
+		return (NULL);
+	}
 	while (str[i])
 	{
-		if (str[i] == '-' || str[i] == '+' || str[i] == ' ' || str[i] == '0' ||
-		str[i] == '#')
-			node->flag = str[i];
-		if (s)
+		if (str[i] == '+' || str[i] == '-' || str[i] == ' ' ||
+		str[i] == '0' || str[i] == '#')
+			ft_handle_flags(str[i], flags);
+		if (str[i] == 'h' || str[i] == 'l' || str[i] == 'L' || str[i] == 'z' ||
+		str[i] == 'j' || str[i] == 't')
+			ft_handle_length(&str[i], length);
+		i++;
 	}
+	fields = (t_holder *)malloc(sizeof(t_holder));
+	fields->flag = flags;
+	fields->length = length;
+	fields->type = str[i - 1];
+	return (fields);
 }
 
 /*
@@ -75,7 +91,7 @@ int		ft_printf(const char * restrict format, ...)
 		else
 		{
 			field = handle_format(format, &i);
-			//parse_field(field); // c konca
+			parse_field(field); // c konca
 		}
 	}
 	ft_putchar('\n');
