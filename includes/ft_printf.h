@@ -6,12 +6,42 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 11:37:38 by mburl             #+#    #+#             */
-/*   Updated: 2019/10/25 12:46:09 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/12 17:30:22 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
+
+# include "libft.h"
+# include <stdarg.h>
+# include <errno.h>
+# include <stdio.h>
+
+# define BUFF_SIZE 64
+
+typedef struct s_printf
+{
+	int			len;
+	short		f;
+	short		n;
+	int			min_len;
+	int			precision;
+	int			padding;
+	int			printed;
+	int			fd;
+	int			buff_index;
+	char		buff[BUFF_SIZE];
+	va_list		ap;
+	char		*format;
+	unsigned	c;
+	
+}				t_printf;
+
+
+
+
+
 
 
 typedef struct	s_flags

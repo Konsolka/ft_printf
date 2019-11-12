@@ -6,12 +6,11 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 11:07:13 by mburl             #+#    #+#             */
-/*   Updated: 2019/10/25 12:47:24 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/12 17:29:19 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
-#include <stdio.h>
+#include "libft.h"
 
 int		ft_printf(const char * restrict format, ...);
 
