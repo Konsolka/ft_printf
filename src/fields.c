@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 12:02:37 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/13 17:27:05 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/13 18:02:22 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		ft_pad(t_flags *flags, int size)
 		return (size);
 	width = 0;
 	while (width++ < flags->width - size)
-		ft_wrtie((flags->zero && !flags->minus) ? "0" : " ", 1, flags);
+		ft_write((flags->zero && !flags->minus) ? "0" : " ", 1, flags);
 	return (size + width - 1);
 }
 

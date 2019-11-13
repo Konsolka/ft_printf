@@ -1,22 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print_i.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/22 11:07:13 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/13 18:05:43 by mburl            ###   ########.fr       */
+/*   Created: 2019/11/13 18:09:06 by mburl             #+#    #+#             */
+/*   Updated: 2019/11/13 18:11:32 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-int		ft_printf(const char * restrict format, ...);
-
-int		main(void)
-{
-	ft_printf("asdf");
-	return (0);
-}
-
+int		print_i(va_list args, t_flags *flags);

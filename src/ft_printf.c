@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 13:49:30 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/13 17:32:08 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/13 18:02:17 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,6 @@ int		ft_printf(const char * restrict format, ...)
 	}
 	va_end(args);
 	if (flags.byte > 0)
-		wrtie(1, flags.buff, (size_t)flags.byte);
+		write(1, flags.buff, (size_t)flags.byte);
 	return (bytes);
 }

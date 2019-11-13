@@ -20,7 +20,7 @@ OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))
 FT		= ./libft/
 FT_LIB	= $(addprefix $(FT),libft.a)
 FT_INC	= -I ./libft
-FT_LNK	= -L ./libft -l ft
+FT_LNK	= -L ./libft -lft
 
 
 all: obj $(FT_LIB) $(NAME)
