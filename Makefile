@@ -9,10 +9,10 @@ OBJDIR	= ./obj/
 
 # compiler
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror -g
+CFLAGS	= -Wall -Wextra -g
 
 # src / obj files
-SRC		= main.c ft_printf.c fields.c
+SRC		= main.c parse_filed.c ft_strsearch.c ft_printf.c
 
 OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))
 

@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 11:37:38 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/12 17:30:22 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/13 14:16:56 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,37 +20,20 @@
 
 # define BUFF_SIZE 64
 
-typedef struct s_printf
-{
-	int			len;
-	short		f;
-	short		n;
-	int			min_len;
-	int			precision;
-	int			padding;
-	int			printed;
-	int			fd;
-	int			buff_index;
-	char		buff[BUFF_SIZE];
-	va_list		ap;
-	char		*format;
-	unsigned	c;
-	
-}				t_printf;
-
-
-
-
-
-
-
 typedef struct	s_flags
 {
-    int		zero;
-    int		minus;
-    int		plus;
-    int		space;
-    int		hash;
+	int		hash;
+	int		zero;
+	int		minus;
+	int		plus;
+	int		space;
+	int		width;
+	int		precision;
+	char	*len;
+	char	type;
+	char	buff[BUFF_SIZE];
+	int		byte;
+	int		byte_total;
 }				t_flags;
 
 typedef struct	s_length
@@ -67,6 +50,7 @@ typedef struct	s_length
 
 typedef struct	s_holder
 {
+	// char		flag[4]
 	t_flags		*flag;
 	char		*param;
 	char		*width;
@@ -77,7 +61,7 @@ typedef struct	s_holder
 
 void    ft_set_flags_to_zero(t_flags **flags);
 void	ft_set_len_to_zero(t_length **len);
-void    ft_handle_flags(char c, t_flags *flags);
+void	handle_length(char *str, t_flags *flags);
 void	ft_handle_length(char *str, t_length *len);
 
 #endif

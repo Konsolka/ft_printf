@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 13:49:30 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/12 17:29:44 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/13 14:17:12 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,37 +16,37 @@
 **	trying to write % parcer to the t_holder struct
 **	should somehow parce string for example -lld to fields in t_holder fields
 */
-t_holder		*parse_field(char *str)
-{
-	t_holder	*fields;
-	t_flags		*flags;
-	t_length	*length;
-	int 	i;
+// t_holder		*parse_field(char *str)
+// {
+// 	t_holder	*fields;
+// 	t_flags		*flags;
+// 	t_length	*length;
+// 	int 	i;
 
-	ft_set_flags_to_zero(&flags);
-	ft_set_len_to_zero(&length);
-	i = 0;
-	if (str[ft_strlen(str) - 1] == '%')
-	{
-		ft_putchar('%');
-		return (NULL);
-	}
-	while (str[i])
-	{
-		if (str[i] == '+' || str[i] == '-' || str[i] == ' ' ||
-		str[i] == '0' || str[i] == '#')
-			ft_handle_flags(str[i], flags);
-		if (str[i] == 'h' || str[i] == 'l' || str[i] == 'L' || str[i] == 'z' ||
-		str[i] == 'j' || str[i] == 't')
-			ft_handle_length(&str[i], length);
-		i++;
-	}
-	fields = (t_holder *)malloc(sizeof(t_holder));
-	fields->flag = flags;
-	fields->length = length;
-	fields->type = str[i - 1];
-	return (fields);
-}
+// 	ft_set_flags_to_zero(&flags);
+// 	ft_set_len_to_zero(&length);
+// 	i = 0;
+// 	if (str[ft_strlen(str) - 1] == '%')
+// 	{
+// 		ft_putchar('%');
+// 		return (NULL);
+// 	}
+// 	while (str[i])
+// 	{
+// 		if (str[i] == '+' || str[i] == '-' || str[i] == ' ' ||
+// 		str[i] == '0' || str[i] == '#')
+// 			ft_handle_flags(str[i], flags);
+// 		if (str[i] == 'h' || str[i] == 'l' || str[i] == 'L' || str[i] == 'z' ||
+// 		str[i] == 'j' || str[i] == 't')
+// 			ft_handle_length(&str[i], length);
+// 		i++;
+// 	}
+// 	fields = (t_holder *)malloc(sizeof(t_holder));
+// 	fields->flag = flags;
+// 	fields->length = length;
+// 	fields->type = str[i - 1];
+// 	return (fields);
+// }
 
 /*
 **	gets what is going after %
@@ -78,21 +78,5 @@ char	*handle_format(const char * restrict str, int *i)
 */
 int		ft_printf(const char * restrict format, ...)
 {
-	int		i;
-	char	*field;
 
-	i = 0;
-	while (format[i])
-	{
-		if (format[i] != '%')
-			ft_putchar(format[i++]);
-		else
-		{
-			field = handle_format(format, &i);
-			parse_field(field); // c konca
-		}
-	}
-	ft_putchar('\n');
-	ft_putstr(field);
-	return (0);
 }
