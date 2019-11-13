@@ -6,69 +6,56 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 12:02:37 by mburl             #+#    #+#             */
-/*   Updated: 2019/10/25 12:44:49 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/13 17:27:05 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdlib.h>
 
-void    ft_set_flags_to_zero(t_flags **flags)
+int		ft_pad(t_flags *flags, int size)
 {
-	t_flags	*node;
+	int		width;
 
-	node = (t_flags *)malloc(sizeof(t_flags));
-	node->minus = 0;
-	node->plus = 0;
-	node->hash = 0;
-	node->zero = 0;
-	node->space = 0;
-	*flags = node;
+	if (flags->width <= 0)
+		return (size);
+	width = 0;
+	while (width++ < flags->width - size)
+		ft_wrtie((flags->zero && !flags->minus) ? "0" : " ", 1, flags);
+	return (size + width - 1);
 }
 
-void	ft_set_len_to_zero(t_length **len)
+int		ft_write(void *s, int size, t_flags *flags)
 {
-	t_length *node;
+	int		i;
+	char	*str;
 
-	node = (t_length *)malloc(sizeof(t_length));
-	node->h = 0;
-	node->hh = 0;
-	node->j = 0;
-	node->L = 0;
-	node->l = 0;
-	node->ll = 0;
-	node->t = 0;
-	node->z = 0;
-	*len = node;
-}
-void    ft_handle_flags(char c, t_flags *flags)
-{
-	if (c == '-')
-		flags->minus = 1;
-	else if (c == '+')
-		flags->plus = 1;
-	else if (c == ' ')
-		flags->space = 1;
-	else if (c == '0')
-		flags->zero = 1;
-	else if (c == '#')
-		flags->hash = 1;
+	if (flags->byte + size > BUFF_SIZE)
+	{
+		write(1, flags->buff, (size_t)flags->byte);
+		flags->byte = 0;
+		if (size > BUFF_SIZE)
+		{
+			write(1, s, (size_t)size);
+			return (size);
+		}
+	}
+	i = 0;
+	str = s;
+	while (i < size)
+		flags->buff[flags->byte++] = str[i++];
+	flags->byte_total += size;
+	return (size);
 }
 
-void	ft_handle_length(char *str, t_length *len)
+int		write_untill(char **format, t_flags *flags)
 {
-	if (str[0] == 'h' && str[1] == 'h')
-		len->hh = 1;
-	if (str[0] == 'h' && str[1] != 'h' && str[-1] != 'h')
-		len->h = 1;
-	if (str[0] == 'l' && str[1] == 'l')
-		len->ll = 1;
-	if (str[0] == 'l' && str[1] != 'l' && str[-1] != 'l')
-		len->l = 1;
-	if (str[0] == 'L')
-		len->L = 1;
-	if (str[0] == 't')
-		len->t = 1;
-	if (str[0] == 'z')
-		len->z = 1;
+	int		next;
+
+	if (ft_strchr(*format, '%'))
+		next = (int)(ft_strchr(*format, '%') - *format);
+	else
+		next = (int)ft_strlen(*format);
+	ft_write(*format, next, flags);
+	*format += next;
+	return (next);
 }

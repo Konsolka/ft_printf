@@ -6,77 +6,96 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 13:49:30 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/13 14:17:12 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/13 17:32:08 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-/*
-**	trying to write % parcer to the t_holder struct
-**	should somehow parce string for example -lld to fields in t_holder fields
-*/
-// t_holder		*parse_field(char *str)
-// {
-// 	t_holder	*fields;
-// 	t_flags		*flags;
-// 	t_length	*length;
-// 	int 	i;
+t_type	g_type[ARGS] = {
+	// {'c', print_c}, {'C', print_c_upper}, {'d', print_d}, {'D', print_d_upper},
+	// {'i', print_i}, {'o', print_o}, {'u', print_u}, {'x', print_x},
+	// {'X', print_x_upper}, {'e', print_e}, {'E', print_e_upper}, {'f', print_f},
+	// {'F', print_f_upper}, {'g', print_g}, {'G', print_g_upper}, {'a', print_a},
+	// {'A', print_a_upper}, {'n', print_n}, {'p', print_p}, {'s', print_s},
+	// {'S', print_s_upper}, {'Z', print_z_upper}
+};
 
-// 	ft_set_flags_to_zero(&flags);
-// 	ft_set_len_to_zero(&length);
-// 	i = 0;
-// 	if (str[ft_strlen(str) - 1] == '%')
-// 	{
-// 		ft_putchar('%');
-// 		return (NULL);
-// 	}
-// 	while (str[i])
-// 	{
-// 		if (str[i] == '+' || str[i] == '-' || str[i] == ' ' ||
-// 		str[i] == '0' || str[i] == '#')
-// 			ft_handle_flags(str[i], flags);
-// 		if (str[i] == 'h' || str[i] == 'l' || str[i] == 'L' || str[i] == 'z' ||
-// 		str[i] == 'j' || str[i] == 't')
-// 			ft_handle_length(&str[i], length);
-// 		i++;
-// 	}
-// 	fields = (t_holder *)malloc(sizeof(t_holder));
-// 	fields->flag = flags;
-// 	fields->length = length;
-// 	fields->type = str[i - 1];
-// 	return (fields);
-// }
-
-/*
-**	gets what is going after %
-**	example: ft_printf("kek%-lldsi"); will get -lld
-*/
-char	*handle_format(const char * restrict str, int *i)
+static int		handle(char **str, va_list args, t_flags *flags)
 {
-	char	*format;
-	int		temp;
-	int		i_temp;
+	int		flags_found;
 
-	i_temp = *i + 1;
-	temp = i_temp;
-	while (str[i_temp] != 'd' && str[i_temp] != 'i' && str[i_temp] != 'u' && str[i_temp] != 'f' &&
-		str[i_temp] != 'F' && str[i_temp] != 'e' && str[i_temp] != 'E' && str[i_temp] != 'g' &&
-		str[i_temp] != 'G' && str[i_temp] != 'x' && str[i_temp] != 'X' && str[i_temp] != 'o' &&
-		str[i_temp] != 's' && str[i_temp] != 'c' && str[i_temp] != 'p' && str[i_temp] != 'a' &&
-		str[i_temp] != 'A' && str[i_temp] != 'n' && str[i_temp] != '%')
-		i_temp++;
-	i_temp++;
-	format = (char *)malloc(sizeof(char) * (i_temp - temp));
-	format = ft_strsub(str, temp, i_temp - temp);
-	*i = i_temp;
-	return (format);
+	init_flags(flags);
+	while (**str)
+	{
+		flags_found = 0;
+		while (handle_length(str, flags) ||
+				handle_flags(str, flags) ||
+				handle_width(str, flags, args) ||
+				handle_precision(str, flags, args))
+			flags_found = 1;
+		if (ft_isalpha(**str) || **str == '%')
+			return (call_type(str, args, flags));
+		else if (!*(*str + 1) || !flags_found)
+			return (0);
+	}
+	return (0);
+}
+
+int		call_type(char **str, va_list args, t_flags *flags)
+{
+	int		arg;
+	int		size;
+
+	arg = 0;
+	while (arg < ARGS)
+	{
+		if (**str == g_type[arg].name)
+		{
+			*str += 1;
+			flags->type = g_type[arg].name;
+			return (g_type[arg].f(args, flags));
+		}
+		arg++;
+	}
+	size = 1;
+	if (!flags->minus)
+		size = ft_pad(flags, size);
+	ft_write(*str, 1, flags);
+	if (flags->minus)
+		size = ft_pad(flags, size);
+	*str++;
+	return (size);
 }
 
 /*
 **	printf
 */
+
 int		ft_printf(const char * restrict format, ...)
 {
+	t_flags flags;
+	va_list	args;
+	char	*str;
+	int		bytes;
 
+	bytes = 0;
+	flags.byte = 0;
+	flags.byte_total = 0;
+	va_start(args, format);
+	str = (char *)format;
+	while (*str)
+	{
+		if (*str == '%')
+		{
+			str++;
+			bytes += handle(&str, args, &flags);
+		}
+		else
+			bytes += write_untill(&str, &flags);
+	}
+	va_end(args);
+	if (flags.byte > 0)
+		wrtie(1, flags.buff, (size_t)flags.byte);
+	return (bytes);
 }

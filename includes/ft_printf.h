@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 11:37:38 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/13 14:16:56 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/13 17:40:13 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
 # include <stdarg.h>
 # include <errno.h>
 # include <stdio.h>
+# include <unistd.h>
 
 # define BUFF_SIZE 64
+# define ARGS 22
 
 typedef struct	s_flags
 {
@@ -36,17 +38,11 @@ typedef struct	s_flags
 	int		byte_total;
 }				t_flags;
 
-typedef struct	s_length
+typedef struct	s_type
 {
-	int		hh;
-	int		h;
-	int		l;
-	int		ll;
-	int		L;
-	int		z;
-	int		j;
-	int		t;
-}				t_length;
+	char	name;
+	int		(*f)();
+}				t_type;
 
 typedef struct	s_holder
 {
@@ -55,13 +51,17 @@ typedef struct	s_holder
 	char		*param;
 	char		*width;
 	char		*precision;
-	t_length	*length;
 	char		type;
 }				t_holder;
 
-void    ft_set_flags_to_zero(t_flags **flags);
-void	ft_set_len_to_zero(t_length **len);
-void	handle_length(char *str, t_flags *flags);
-void	ft_handle_length(char *str, t_length *len);
+int		ft_pad(t_flags *flags, int size);
+int		ft_write(void *s, int size, t_flags *flags);
+int		write_untill(char **format, t_flags *flags);
+int		call_type(char **str, va_list args, t_flags *flags);
+void	init_flags(t_flags *flags);
+int		handle_flags(char **str, t_flags *flags);
+int		handle_width(char **str, t_flags *flags, va_list args);
+int		handle_precision(char **str, t_flags *flags, va_list args);
+int		handle_length(char **str_c, t_flags *flags);
 
 #endif

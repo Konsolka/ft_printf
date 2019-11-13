@@ -12,7 +12,7 @@ CC		= gcc
 CFLAGS	= -Wall -Wextra -g
 
 # src / obj files
-SRC		= main.c parse_filed.c ft_strsearch.c ft_printf.c
+SRC		= main.c parse_filed.c lst_work.c ft_printf.c fields.c
 
 OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))
 
