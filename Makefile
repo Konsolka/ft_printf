@@ -3,7 +3,7 @@ NAME	= libftprintf
 LIBFT	= libft
 
 # directories
-SRCDIR	= ./src/
+SRCDIR	= ./srcs/
 INCDIR	= ./includes/
 OBJDIR	= ./obj/
 

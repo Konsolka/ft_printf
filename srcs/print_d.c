@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 17:09:24 by abenton           #+#    #+#             */
-/*   Updated: 2019/11/14 15:39:15 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/14 16:20:11 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ static intmax_t     get_number(t_flags *flags, va_list args)
    
 // need to add va_list args to structure
 	num = va_arg(args, intmax_t);
-	if (ft_strcmp(flags->len, "hh") == 0)
+	if (flags->len == LEN_TYPE_HH)
 		num = (signed char)num;
-	else if (ft_strcmp(flags->len, "h") == 0)
+	else if (flags->len == LEN_TYPE_H)
 		num = (short)num;
-	else if (ft_strcmp(flags->len, "ll") == 0)
+	else if (flags->len == LEN_TYPE_LL)
 		num = (long long)num;
-	else if (ft_strcmp(flags->len, "l") == 0)
+	else if (flags->len == LEN_TYPE_L)
 		num = (long)num;
-	else if (ft_strcmp(flags->len, "j"))
+	else if (flags->len == LEN_TYPE_J)
 		num = (intmax_t)num;
-	else if (ft_strcmp(flags->len, "z"))
+	else if (flags->len == LEN_TYPE_Z)
 		num = (size_t)num;
 	else
 		num = (int)num;

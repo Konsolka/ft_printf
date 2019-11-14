@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_work.c                                         :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/13 13:56:42 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/14 15:08:35 by mburl            ###   ########.fr       */
+/*   Created: 2019/10/22 11:07:13 by mburl             #+#    #+#             */
+/*   Updated: 2019/11/14 17:17:19 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
+#include <stdio.h>
 
-void	init_flags(t_flags *flags)
+int		ft_printf(const char * restrict format, ...);
+
+int		main(void)
 {
-	flags->precision = 0;
-	flags->minus = 0;
-	flags->plus = 0;
-	flags->hash = 0;
-	flags->zero = 0;
-	flags->space = 0;
-	flags->width = 0;
-	flags->len = ft_strnew(3);
+	ft_printf("ft_printf = %5i\n", 5234);
+	printf("printf = %5i", 5234);
+	return (0);
 }

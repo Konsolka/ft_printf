@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 13:49:30 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/14 15:04:09 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/14 16:50:58 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int		call_type(char **str, va_list args, t_flags *flags)
 	ft_write(*str, 1, flags);
 	if (flags->minus)
 		size = ft_pad(flags, size);
-	*str++;
+	*str += 1;
 	return (size);
 }
 

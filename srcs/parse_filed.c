@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 13:22:22 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/14 15:40:12 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/14 16:51:04 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		handle_width(char **str, t_flags *flags, va_list args) // incorrect
 		}
 		else
 			flags->width = width;
-		while (width > 0 && (*str++))
+		while (width > 0 && (*str += 1))
 		{
 			width /= 10;
 		}
@@ -74,7 +74,7 @@ int		handle_precision(char **str, t_flags *flags, va_list args)
 		if (**str == '*')
 			precision = 1;
 		else if (precision == 0)
-			*str++;
+			*str += 1;
 		while (precision > 0 && *(++str))
 			precision /= 10;
 		return (1);
@@ -82,25 +82,32 @@ int		handle_precision(char **str, t_flags *flags, va_list args)
 	return (0);
 }
 
+void	edit_len_type(int len_type, t_flags *flags, char **str)
+{
+	flags->len = len_type;
+	if (len_type > 4)
+		*str += 1;
+	*str += 1;
+}
 int		handle_length(char **str_c, t_flags *flags)
 {
 	char *str;
 
 	str = *str_c;
 	if (str[0] == 'h' && str[1] == 'h')
-		flags->len = "hh";
+		edit_len_type(LEN_TYPE_HH, flags, str_c);
 	else if (str[0] == 'h')
-		flags->len = "h";
+		edit_len_type(LEN_TYPE_H, flags, str_c);
 	else if (str[0] == 'l' && str[1] == 'l')
-		flags->len = "ll";
+		edit_len_type(LEN_TYPE_LL, flags, str_c);
 	else if (str[0] == 'l')
-		flags->len = "l";
+		edit_len_type(LEN_TYPE_L, flags, str_c);
 	else if (str[0] == 'L')
-		flags->len = "L";
+		edit_len_type(LEN_TYPE_L_LAR, flags, str_c);
 	else if (str[0] == 't')
-		flags->len = "t";
+		edit_len_type(LEN_TYPE_J, flags, str_c);
 	else if (str[0] == 'z')
-		flags->len = "z";
+		edit_len_type(LEN_TYPE_Z, flags, str_c);
 	else
 		return (0);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 11:37:38 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/14 14:55:43 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/14 16:20:58 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@
 # define BUFF_SIZE 64
 # define ARGS 22
 
+# define LEN_TYPE_H 0
+# define LEN_TYPE_L_LAR 1
+# define LEN_TYPE_J 2
+# define LEN_TYPE_L 3
+# define LEN_TYPE_Z 4
+# define LEN_TYPE_LL 5
+# define LEN_TYPE_HH 6
+
 typedef struct	s_flags
 {
 	int		hash;
@@ -31,7 +39,7 @@ typedef struct	s_flags
 	int		space;
 	int		width;
 	int		precision;
-	char	*len;
+	int		len;
 	char	type;
 	char	buff[BUFF_SIZE];
 	int		byte;
@@ -44,6 +52,7 @@ typedef struct	s_type
 	int		(*f)();
 }				t_type;
 
+int		ft_printf(const char * restrict format, ...);
 int		ft_pad(t_flags *flags, int size);
 int		ft_write(void *s, int size, t_flags *flags);
 int		write_untill(char **format, t_flags *flags);
