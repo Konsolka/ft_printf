@@ -2,8 +2,6 @@
 #include <stdlib.h>
 int		main(void)
 {
-	char *str;
-
-	 printf("Le fichier{cyan}%s{eoc} contient : {red}%s{eoc}", "lel", str);
+	printf( "%+5i", 5 );
 	return (0);
 }

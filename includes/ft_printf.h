@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 11:37:38 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/13 17:40:13 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/14 14:50:24 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,6 @@ typedef struct	s_type
 	char	name;
 	int		(*f)();
 }				t_type;
-
-typedef struct	s_holder
-{
-	// char		flag[4]
-	t_flags		*flag;
-	char		*param;
-	char		*width;
-	char		*precision;
-	char		type;
-}				t_holder;
 
 int		ft_pad(t_flags *flags, int size);
 int		ft_write(void *s, int size, t_flags *flags);
