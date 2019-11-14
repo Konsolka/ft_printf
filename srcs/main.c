@@ -6,18 +6,15 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 11:07:13 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/14 17:17:19 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/14 18:04:55 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdio.h>
 
-int		ft_printf(const char * restrict format, ...);
+#include <stdio.h>
 
 int		main(void)
 {
-	ft_printf("ft_printf = %5i\n", 5234);
-	printf("printf = %5i", 5234);
+	printf("%+0.5i", 0);
 	return (0);
 }

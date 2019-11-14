@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 13:22:22 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/14 16:51:04 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/14 17:36:22 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		handle_width(char **str, t_flags *flags, va_list args) // incorrect
 {
 	int		width;
 
-	if ((width = ft_atoi(*str)) > 0 || **str == '*')
+	if (((width = ft_atoi(*str)) > 0 || **str == '*'))
 	{
 		if (**str == '*')
 		{
@@ -46,10 +46,8 @@ int		handle_width(char **str, t_flags *flags, va_list args) // incorrect
 		}
 		else
 			flags->width = width;
-		while (width > 0 && (*str += 1))
-		{
+		while (width > 0 && (*str += 1)) // %8.5i не работает
 			width /= 10;
-		}
 		return (1);
 	}
 	return (0);
@@ -64,7 +62,7 @@ int		handle_precision(char **str, t_flags *flags, va_list args)
 		*str += 1;
 		if (!ft_isdigit(**str) && **str != '*')
 		{
-			flags->precision = 1;
+			flags->precision = -1;
 			return (1);
 		}
 		precision = (**str == '*') ? va_arg(args, int) : ft_atoi(*str);
@@ -75,7 +73,7 @@ int		handle_precision(char **str, t_flags *flags, va_list args)
 			precision = 1;
 		else if (precision == 0)
 			*str += 1;
-		while (precision > 0 && *(++str))
+		while (precision > 0 && (*str += 1))
 			precision /= 10;
 		return (1);
 	}
