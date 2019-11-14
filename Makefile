@@ -12,7 +12,7 @@ CC		= gcc
 CFLAGS	= -Wall -Wextra -g
 
 # src / obj files
-SRC		= main.c parse_filed.c lst_work.c ft_printf.c fields.c
+SRC		= main.c parse_filed.c lst_work.c ft_printf.c fields.c print_d.c
 
 OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))
 
@@ -29,13 +29,13 @@ obj:
 	mkdir -p $(OBJDIR)
 
 $(OBJDIR)%.o:$(SRCDIR)%.c
-	$(CC) $(CFLAGS) $(FT_INC) -I $(INCDIR) -o $@ -c $<
+	$(CC) -g $(CFLAGS) $(FT_INC) -I $(INCDIR) -o $@ -c $<
 
 $(FT_LIB):
 	make -C $(FT)
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) $(FT_LNK) -o $(NAME)
+	$(CC) -g $(OBJ) $(FT_LNK) -o $(NAME)
 
 
 clean:

@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 11:07:13 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/13 18:05:43 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/14 15:39:38 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int		ft_printf(const char * restrict format, ...);
 
 int		main(void)
 {
-	ft_printf("asdf");
+	ft_printf("ft_printf = %5i\n", 5234);
+	printf("printf = %5i", 5234);
 	return (0);
 }
 

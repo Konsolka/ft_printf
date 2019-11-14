@@ -6,13 +6,14 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 13:49:30 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/13 18:02:17 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/14 15:04:09 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 t_type	g_type[ARGS] = {
+	{'i', print_d}
 	// {'c', print_c}, {'C', print_c_upper}, {'d', print_d}, {'D', print_d_upper},
 	// {'i', print_i}, {'o', print_o}, {'u', print_u}, {'x', print_x},
 	// {'X', print_x_upper}, {'e', print_e}, {'E', print_e_upper}, {'f', print_f},
@@ -54,7 +55,7 @@ int		call_type(char **str, va_list args, t_flags *flags)
 		{
 			*str += 1;
 			flags->type = g_type[arg].name;
-			return (g_type[arg].f(args, flags));
+			return (g_type[arg].f(flags, args));
 		}
 		arg++;
 	}

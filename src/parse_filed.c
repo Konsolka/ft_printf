@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 13:22:22 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/13 17:39:56 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/14 15:40:12 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		handle_flags(char **str, t_flags *flags)
 	return (1);
 }
 
-int		handle_width(char **str, t_flags *flags, va_list args)
+int		handle_width(char **str, t_flags *flags, va_list args) // incorrect
 {
 	int		width;
 
