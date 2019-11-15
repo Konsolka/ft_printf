@@ -6,15 +6,18 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 11:07:13 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/14 18:04:55 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/15 12:15:00 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include <stdio.h>
+#include "ft_printf.h"
 
 int		main(void)
 {
-	printf("%+0.5i", 0);
+
+	ft_printf("%+5.0i", 0);
+
 	return (0);
 }

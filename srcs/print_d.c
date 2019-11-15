@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 17:09:24 by abenton           #+#    #+#             */
-/*   Updated: 2019/11/14 18:09:46 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/15 12:47:20 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ int		ft_write_char(char c, t_flags *flags)
 {
 	return (ft_write(&c, 1, flags));
 }
-void	ft_putnbr_max_int(uintmax_t nb, char *str, uintmax_t str_len, t_flags *flags)
+void	ft_putnbr_maxint_u(uintmax_t nb, char *str, uintmax_t str_len, t_flags *flags)
 {
 	if (nb >= str_len)
-		ft_putnbr_max_int(nb / str_len, str, str_len, flags);
+		ft_putnbr_maxint_u(nb / str_len, str, str_len, flags);
 	ft_write_char(str[nb % str_len], flags);
 }
 void	display_sign(intmax_t nb, t_flags *flags)
@@ -71,17 +71,17 @@ int		display_d(t_flags *flags, int size, int prec, intmax_t nb)
 		display_sign(nb, flags);
 	while (width++ < prec)
 		ft_write("0", 1, flags);
-	if (size > 0 ) //&& ((flags->width || flags->precision)  && !flags->plus && nb) not and may be xor
-		ft_putnbr_max_int((nb < 0 ? -nb : nb), "0123456789", 10, flags);
+	if (size > 0) //&& ((flags->width || flags->precision)  && !flags->plus && nb) not and may be xor
+		ft_putnbr_maxint_u((nb < 0 ? -nb : nb), "0123456789", 10, flags);
 	return (size + width_size);
 }
 
-void	get_number_size(uintmax_t nb, int *size)
+void	get_number_size(uintmax_t nb, uintmax_t str_len, int *size)
 {
 	*size += 1;
-	while (nb >= 10)
+	while (nb >= str_len)
 	{
-		nb /= 10;
+		nb /= str_len;
 		*size += 1;
 	}
 }
@@ -96,7 +96,7 @@ int		print_d(t_flags *flags, va_list args)
 		flags->zero = 0;
 	nb = get_number(flags, args);
 	size = 0;
-	get_number_size((uintmax_t)(nb < 0 ? -nb : nb), &size);
+	get_number_size((uintmax_t)(nb < 0 ? -nb : nb), 10, &size);
 	precision = flags->precision - size;
 	size = (flags->precision > size) ? flags->precision : size;
 	size = (flags->precision == -1 && nb == 0) ? 0 : size;
@@ -109,5 +109,86 @@ int		print_d(t_flags *flags, va_list args)
 // think about max number
 // -9223372036854775808
 //
+	return (size);
+}
+
+uintmax_t	get_number_u(t_flags *flags, va_list args)
+{
+	uintmax_t    num;
+
+// need to add va_list args to structure
+	num = va_arg(args, uintmax_t);
+	if (flags->len == LEN_TYPE_HH)
+		num = (unsigned char)num;
+	else if (flags->len == LEN_TYPE_H)
+		num = (unsigned short)num;
+	else if (flags->len == LEN_TYPE_LL)
+		num = (unsigned long long)num;
+	else if (flags->len == LEN_TYPE_L)
+		num = (unsigned long)num;
+	else if (flags->len == LEN_TYPE_J)
+		num = (uintmax_t)num;
+	else if (flags->len == LEN_TYPE_Z)
+		num = (size_t)num;
+	else
+		num = (unsigned int)num;
+	return (num);
+}
+
+int		print_o(t_flags *flags, va_list args)
+{
+	uintmax_t	nb;
+	int			size;
+	int			nb_size;
+
+	if (flags->precision != 0)
+		flags->zero = 0;
+	size = 0;
+	nb = get_number_u(flags, args);
+	if (flags->precision >= 0 || nb > 0)
+		get_number_size(nb , 8, &size);
+	if (flags->hash && (nb > 0 || flags->precision < 0))
+		size += 1;
+	nb_size = size;
+	size = (flags->precision > size) ? flags->precision : size;
+	if (flags->width && !flags->minus)
+		size = ft_pad(flags, size);
+	if (flags->hash && (nb > 0 || flags->precision < 0))
+		ft_write("0", 1, flags);
+	while (nb_size++ < flags->precision)
+		ft_write("0", 1, flags);
+	if (flags->precision >= 0 || nb > 0)
+		ft_putnbr_maxint_u(nb, "01234567", 8, flags);
+	if (flags->width && flags->minus)
+		size = ft_pad(flags, size);
+	return (size);
+}
+
+int		print_u(t_flags *flags, va_list args)
+{
+	uintmax_t	nb;
+	int			size;
+	int			nb_size;
+
+	if (flags->precision != 0)
+		flags->zero = 0;
+	size = 0;
+	nb = get_number_u(flags, args);
+	if (flags->precision >= 0 || nb > 0)
+		get_number_size(nb , 10, &size);
+	if (flags->hash && (nb > 0 || flags->precision < 0))
+		size += 1;
+	nb_size = size;
+	size = (flags->precision > size) ? flags->precision : size;
+	if (flags->width && !flags->minus)
+		size = ft_pad(flags, size);
+	if (flags->hash && (nb > 0 || flags->precision < 0))
+		ft_write("0", 1, flags);
+	while (nb_size++ < flags->precision)
+		ft_write("0", 1, flags);
+	if (flags->precision >= 0 || nb > 0)
+		ft_putnbr_maxint_u(nb, "0123456789", 10, flags);
+	if (flags->width && flags->minus)
+		size = ft_pad(flags, size);
 	return (size);
 }
