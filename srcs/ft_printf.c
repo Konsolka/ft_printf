@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 13:49:30 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/15 15:34:31 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/15 16:18:55 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ int		call_type(char **str, va_list args, t_flags *flags)
 		{
 			*str += 1;
 			flags->type = g_type[arg].name;
-			//return (g_type[arg].f(flags, args));
-			return (print_s(flags, args));
+			return (g_type[arg].f(flags, args));
+			//return (print_s(flags, args));
 		}
 		arg++;
 	}

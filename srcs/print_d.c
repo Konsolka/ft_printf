@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 17:09:24 by abenton           #+#    #+#             */
-/*   Updated: 2019/11/15 15:23:28 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/15 17:03:32 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,10 +206,11 @@ void		display_padding(t_flags *flags, uintmax_t nb, int *size, char *base)
 		return ;
 	}
 	width = 0;
+	printf("-- %i --", *size);
 	prec = flags->precision - *size;
-	*size = (flags->precision > *size) ? flags->precision : *size;
-	while (flags->minus && width++ < prec )
+	while (flags->minus && width++ < prec)
 		ft_write("0", 1, flags);
+	*size = (flags->precision > *size) ? flags->precision : *size;
 	if (flags->minus && flags->precision != -1)
 		ft_putnbr_maxint_u(nb, base, ft_strlen(base), flags);
 	width = 0;
@@ -230,7 +231,7 @@ int		handle_hash(t_flags *flags, uintmax_t nb, int *size, char *hash_key)
 	if (nb == 0 && flags->type != 'p')
 		flags->hash = 0;
 	if (flags->hash && (!flags->width || flags->minus || flags->zero ||
-			(prec = flags->width > *size)))
+			(prec = flags->precision > *size)))
 		ft_write(hash_key, (int)ft_strlen(hash_key), flags);
 	if (flags->hash && ((flags->width) && !prec) && flags->type != 'p')
 		*size += (int)ft_strlen(hash_key);
@@ -246,16 +247,16 @@ int		ft_pad_nb(t_flags *flags, va_list args, char *base, char *hash_key)
 	if (flags->precision != 0)
 		flags->zero = 0;
 	size = 0;
-	nb = get_number(flags, args);
+	nb = get_number_u(flags, args);
 	get_number_size(nb, ft_strlen(base), &size);
+	printf("--- %i ---\n", size);
 	prec = handle_hash(flags, nb, &size, hash_key);
 	if (flags->precision == -1 && !nb)
-		size = 0;
-	display_padding(flags, nb, &size, base);
+			size = 0;
+		display_padding(flags, nb, &size, base);
 	if (flags->hash && flags->width && !flags->minus && !flags->zero &&
-		!prec)
+			!prec)
 		ft_write(hash_key, (int)ft_strlen(hash_key), flags);
-	printf("--	%x	--", nb);
 	if ((!flags->width || !flags->minus) && size > 0)
 		ft_putnbr_maxint_u(nb, base, ft_strlen(base), flags);
 	if (flags->hash && size > 0 && ((!flags->width || flags->minus) ||
@@ -267,5 +268,5 @@ int		ft_pad_nb(t_flags *flags, va_list args, char *base, char *hash_key)
 }
 int		print_x(t_flags *flags, va_list args)
 {
-	return (ft_pad_nb(flags, args, "0123456789abcdef", "OX"));
+	return (ft_pad_nb(flags, args, "0123456789abcdef", "0x"));
 }
