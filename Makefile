@@ -1,49 +1,49 @@
-NAME	= libftprintf
+C = clang
 
-LIBFT	= libft
+NAME = libftprintf.a
 
-# directories
-SRCDIR	= ./srcs/
-INCDIR	= ./includes/
-OBJDIR	= ./obj/
+FLAGS = -Wall -Wextra -O2
 
-# compiler
-CC		= gcc
-CFLAGS	= -Wall -Wextra -g
+LIBFT = libft/
 
-# src / obj files
-SRC		= main.c parse_filed.c lst_work.c ft_printf.c fields.c print_d.c print_s.c
+DIR_S = srcs
 
-OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))
+DIR_O = obj
 
-# ft library
-FT		= ./libft/
-FT_LIB	= $(addprefix $(FT),libft.a)
-FT_INC	= -I ./libft
-FT_LNK	= -L ./libft -lft
+HEADER = includes/
 
+SOURCES = ft_printf.c fields.c lst_work.c parse_filed.c print_d.c print_s.c
 
-all: obj $(FT_LIB) $(NAME)
+SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
 
-obj:
-	mkdir -p $(OBJDIR)
+OBJS = $(addprefix $(DIR_O)/,$(SOURCES:.c=.o))
 
-$(OBJDIR)%.o:$(SRCDIR)%.c
-	$(CC) -g $(CFLAGS) $(FT_INC) -I $(INCDIR) -o $@ -c $<
+all: $(NAME)
 
-$(FT_LIB):
-	make -C $(FT)
+$(NAME): $(OBJS)
+	@make -C $(LIBFT)
+	@cp libft/libft.a ./$(NAME)
+	@ar rc $(NAME) $(OBJS)
+	@ranlib $(NAME)
 
-$(NAME): $(OBJ)
-	$(CC) -g $(OBJ) $(FT_LNK) -o $(NAME)
+$(DIR_O)/%.o: $(DIR_S)/%.c
+	@mkdir -p $(DIR_O)
+	@$(CC) $(FLAGS) -I $(HEADER) -I libft/ -o $@ -c $<
 
+norme:
+	norminette ./libft/
+	@echo
+	norminette ./$(HEADER)/
+	@echo
+	norminette ./$(DIR_S)/
 
 clean:
-	rm -rf $(OBJDIR)
-	make -C $(FT) clean
+	@rm -f $(OBJS)
+	@rm -rf $(DIR_O)
+	@make clean -C $(LIBFT)
 
 fclean: clean
-	rm -rf $(NAME)
-	make -C $(FT) fclean
+	@rm -f $(NAME)
+	@make fclean -C $(LIBFT)
 
-re: fclean all%
+re: fclean all

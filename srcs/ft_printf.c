@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 13:49:30 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/15 16:18:55 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/15 17:15:25 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_type	g_type[ARGS] = {
 	{'i', print_d}, {'d', print_d}, {'o', print_o} , {'u', print_u},
-	{'s', print_s}, {'x', print_x}
+	{'s', print_s}, {'x', print_x}, {'X', print_x_upper}
 	// {'c', print_c}, {'C', print_c_upper}, {'d', print_d}, {'D', print_d_upper},
 	// {'i', print_i}, {'o', print_o}, {'u', print_u}, {'x', print_x},
 	// {'X', print_x_upper}, {'e', print_e}, {'E', print_e_upper}, {'f', print_f},

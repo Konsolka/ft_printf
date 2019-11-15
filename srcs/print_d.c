@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 17:09:24 by abenton           #+#    #+#             */
-/*   Updated: 2019/11/15 17:03:32 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/15 17:17:44 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,7 +206,6 @@ void		display_padding(t_flags *flags, uintmax_t nb, int *size, char *base)
 		return ;
 	}
 	width = 0;
-	printf("-- %i --", *size);
 	prec = flags->precision - *size;
 	while (flags->minus && width++ < prec)
 		ft_write("0", 1, flags);
@@ -249,7 +248,6 @@ int		ft_pad_nb(t_flags *flags, va_list args, char *base, char *hash_key)
 	size = 0;
 	nb = get_number_u(flags, args);
 	get_number_size(nb, ft_strlen(base), &size);
-	printf("--- %i ---\n", size);
 	prec = handle_hash(flags, nb, &size, hash_key);
 	if (flags->precision == -1 && !nb)
 			size = 0;
@@ -269,4 +267,9 @@ int		ft_pad_nb(t_flags *flags, va_list args, char *base, char *hash_key)
 int		print_x(t_flags *flags, va_list args)
 {
 	return (ft_pad_nb(flags, args, "0123456789abcdef", "0x"));
+}
+
+int		print_x_upper(t_flags *flags, va_list args)
+{
+	return (ft_pad_nb(flags, args, "0123456789ABCDEF", "0X"));
 }

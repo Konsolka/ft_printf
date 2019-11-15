@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 11:37:38 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/15 14:53:37 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/15 17:15:11 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,5 @@ int		print_d(t_flags *flags, va_list args);
 int		print_s(t_flags *flags, va_list args);
 int		print_x(t_flags *flags, va_list args);
 int		print_s(t_flags	*flags, va_list args);
+int		print_x_upper(t_flags *flags, va_list args);
 #endif
