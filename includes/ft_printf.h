@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 11:37:38 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/15 12:00:55 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/15 14:53:37 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,7 @@ int		handle_length(char **str_c, t_flags *flags);
 int		print_o(t_flags *flags, va_list args);
 int		print_u(t_flags *flags, va_list args);
 int		print_d(t_flags *flags, va_list args);
+int		print_s(t_flags *flags, va_list args);
+int		print_x(t_flags *flags, va_list args);
+int		print_s(t_flags	*flags, va_list args);
 #endif
