@@ -2,7 +2,7 @@ C = clang
 
 NAME = libftprintf.a
 
-FLAGS = -Wall -Wextra -Werror -O2
+FLAGS = -Wall -Wextra -O2
 
 LIBFT = libft/
 
@@ -12,7 +12,7 @@ DIR_O = obj
 
 HEADER = includes/
 
-SOURCES = ft_printf.c fields.c lst_work.c parse_filed.c print_d.c
+SOURCES = ft_printf.c fields.c lst_work.c parse_filed.c print_d.c print_s.c
 
 SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
 

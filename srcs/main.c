@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 11:07:13 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/15 15:01:38 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/15 15:48:19 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 int		main(void)
 {
 
-	printf("asd%s\n","LeL");
-	ft_printf("asd%s\n", "LeL");
+	printf("%3.s\n", "kek");
+	//ft_printf("%s", "kek")
 	return (0);
 }

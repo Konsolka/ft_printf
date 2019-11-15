@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 17:09:24 by abenton           #+#    #+#             */
-/*   Updated: 2019/11/15 15:00:40 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/15 15:23:28 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,6 +255,7 @@ int		ft_pad_nb(t_flags *flags, va_list args, char *base, char *hash_key)
 	if (flags->hash && flags->width && !flags->minus && !flags->zero &&
 		!prec)
 		ft_write(hash_key, (int)ft_strlen(hash_key), flags);
+	printf("--	%x	--", nb);
 	if ((!flags->width || !flags->minus) && size > 0)
 		ft_putnbr_maxint_u(nb, base, ft_strlen(base), flags);
 	if (flags->hash && size > 0 && ((!flags->width || flags->minus) ||
@@ -266,5 +267,5 @@ int		ft_pad_nb(t_flags *flags, va_list args, char *base, char *hash_key)
 }
 int		print_x(t_flags *flags, va_list args)
 {
-	return (ft_pad_nb(flags, args, "0123456789ABCDEF", "OX"));
+	return (ft_pad_nb(flags, args, "0123456789abcdef", "OX"));
 }
