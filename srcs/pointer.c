@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   pointer.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/22 11:07:13 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/17 15:34:22 by mburl            ###   ########.fr       */
+/*   Created: 2019/11/17 15:05:02 by mburl             #+#    #+#             */
+/*   Updated: 2019/11/17 15:06:06 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include <stdio.h>
 #include "ft_printf.h"
 
-int		main(void)
+int		print_p(t_flags *flags, va_list args)
 {
-
-	printf("%f\n", -7.00036);
-	ft_printf("%f", -7.00036);
-	return (0);
+	flags->len = LEN_TYPE_L;
+	flags->hash = 1;
+	return (print_x(flags, args));
 }

@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   float.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/22 11:07:13 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/17 15:34:22 by mburl            ###   ########.fr       */
+/*   Created: 2019/11/17 15:13:19 by mburl             #+#    #+#             */
+/*   Updated: 2019/11/17 15:30:44 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include <stdio.h>
 #include "ft_printf.h"
 
-int		main(void)
+int		print_f(t_flags *flags, va_list args)
 {
+	char	*nb;
+	int		size;
 
-	printf("%f\n", -7.00036);
-	ft_printf("%f", -7.00036);
-	return (0);
+	if (flags->precision <= 0)
+		flags->precision = 7;
+	size = ft_float_to_str(va_arg(args, double), &nb, flags->precision);
+	ft_write(nb, size, flags);
+	free(nb);
+	return (size);
 }

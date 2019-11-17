@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 17:09:24 by abenton           #+#    #+#             */
-/*   Updated: 2019/11/15 17:17:44 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/17 15:11:19 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,6 @@ int		print_d(t_flags *flags, va_list args)
 		size++;
 	size = display_d(flags, size, precision, nb);
 	size = (flags->minus) ? ft_pad(flags, size) : size;
-
-// think about max number
-// -9223372036854775808
-//
 	return (size);
 }
 
@@ -264,6 +260,7 @@ int		ft_pad_nb(t_flags *flags, va_list args, char *base, char *hash_key)
 		size = 2;
 	return (flags->width - size > 0 ? flags->width : size);
 }
+
 int		print_x(t_flags *flags, va_list args)
 {
 	return (ft_pad_nb(flags, args, "0123456789abcdef", "0x"));
