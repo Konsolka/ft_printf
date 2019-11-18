@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 15:16:46 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/17 17:06:10 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/18 15:36:49 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,12 @@ static void		handle_dec(char **str, int *i, double nb, int prec)
 	s[(*i)++] = '.';
 	while (j++ < prec)
 	{
-		if ((int)nb == 0)
-		{
-			s[(*i)++] = '0';
-			nb *= 10;
-			continue ;
-		}
-		temp = ((int)nb != 9) ? (int)(nb + 0.01) : (int)nb;
-		printf("\n%f - %d\n", (nb - temp) * 10, (int)nb);
+		temp = ((int)nb != 9) ? (int)(nb + 0.01) : (int)(nb);
 		s[(*i)++] = (char)(temp + 48);
 		nb = (nb - temp) * 10;
 	}
+	if ((int)(nb * 10) >= 5)
+		s[--*(i)] += 1;
 }
 
 static int		handle_inf(char **s)
@@ -75,7 +70,7 @@ static int		handle_inf(char **s)
 		return (3);
 }
 
-int				ft_float_to_str(double nb, char **s, int prec)
+int				ft_gcvt(double nb, char **s, int prec)
 {
 	int		i;
 	int		size;

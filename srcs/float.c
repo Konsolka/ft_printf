@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 15:13:19 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/17 15:30:44 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/18 15:21:12 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		print_f(t_flags *flags, va_list args)
 
 	if (flags->precision <= 0)
 		flags->precision = 7;
-	size = ft_float_to_str(va_arg(args, double), &nb, flags->precision);
+	size = ft_gcvt(va_arg(args, double), &nb, flags->precision);
 	ft_write(nb, size, flags);
 	free(nb);
 	return (size);

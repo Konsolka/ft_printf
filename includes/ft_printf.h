@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 11:37:38 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/17 15:30:38 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/18 15:21:37 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int		handle_flags(char **str, t_flags *flags);
 int		handle_width(char **str, t_flags *flags, va_list args);
 int		handle_precision(char **str, t_flags *flags, va_list args);
 int		handle_length(char **str_c, t_flags *flags);
-int		ft_float_to_str(double nb, char **s, int prec);
+int		ft_gcvt(double nb, char **s, int prec);
 int		print_o(t_flags *flags, va_list args);
 int		print_u(t_flags *flags, va_list args);
 int		print_d(t_flags *flags, va_list args);
