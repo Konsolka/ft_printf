@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   test_kate.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: abenton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/22 11:07:13 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/18 14:30:45 by abenton          ###   ########.fr       */
+/*   Created: 2019/11/18 12:03:39 by abenton           #+#    #+#             */
+/*   Updated: 2019/11/18 14:12:57 by abenton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include <stdio.h>
-#include "ft_printf.h"
 
-int		main(void)
+int	main(void)
 {
-
-	printf("hello, %s\n.", NULL);
-	ft_printf("hello, %s.", NULL);
-	return (0);
+	printf("%.s", NULL);
+	printf("%.0s", "");
 }
