@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 11:07:13 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/18 14:30:45 by abenton          ###   ########.fr       */
+/*   Updated: 2019/11/18 16:08:27 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 int		main(void)
 {
 
-	printf("hello, %s\n.", NULL);
-	ft_printf("hello, %s.", NULL);
+	printf("%-32s", NULL);
+	ft_printf("%-32s", NULL);
 	return (0);
 }

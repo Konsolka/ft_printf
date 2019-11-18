@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 12:26:39 by abenton           #+#    #+#             */
-/*   Updated: 2019/11/18 15:54:48 by abenton          ###   ########.fr       */
+/*   Updated: 2019/11/18 16:31:29 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,33 +32,24 @@ int		print_s(t_flags	*flags, va_list args)
 {
 	char	*s;
 	int		len;
+	int		width;
 
-	len = 0;
-	if (args == NULL || flags->precision == -1)
-		return (0);
 	s = va_arg(args, char *);
-	if (flags->precision > 0 && s)
-		s = ft_strndup(s, flags->precision);
-	else if (flags->precision == 0 && s)
-		s = ft_strdup(s);
-	else if (!s && flags->precision > 0)
-	{
-		if (flags->precision > 6)
-			s = ft_strdup("(null)");
-		else
-			s = ft_strndup("(null)", flags->precision);
-	}
-	else if ((flags->precision == 0 || flags->precision == -1) && !s)
+	if (!s)
 		s = ft_strdup("(null)");
-	else if (!flags->precision && !s)
-		s = ft_strdup("");
-	if (flags->width > 0 && flags->precision == -1 && !s)
-		len += ft_pad(flags, len);
-	len += ft_strlen(s);
-	if (flags->width > 0 && !flags->minus)
-		len += ft_pad(flags, len);
-	ft_write(s, (int)ft_strlen(s), flags);
-	if (flags->width > 0 && flags->minus)
-		len += ft_pad(flags, len);
-	return (len);
+	len = (int)ft_strlen(s);
+	len = (flags->precision == -1) ? 0 : len;
+	if (flags->precision > 0 && flags->precision < len && len > 0)
+		len = flags->precision;
+	if (flags->width)
+	{
+		if (flags->minus)
+			ft_write(s, len, flags);
+		width = 0;
+		while (width++ < flags->width - len)
+			ft_write((flags->zero && !flags->minus) ? "0" : " ", 1, flags);
+	}
+	if (!flags->width || !flags->minus)
+		ft_write((s) ? s : "(null)", len, flags);
+	return (len + (flags->width - len > 0 ? flags->width - len : 0));
 }
