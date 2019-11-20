@@ -6,11 +6,7 @@
 /*   By: abenton <abenton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 11:37:38 by mburl             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2019/11/20 17:30:54 by abenton          ###   ########.fr       */
-=======
-/*   Updated: 2019/11/20 16:04:39 by mburl            ###   ########.fr       */
->>>>>>> master
+/*   Updated: 2019/11/20 17:41:26 by abenton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +71,6 @@ int		print_s(t_flags	*flags, va_list args);
 int		print_x_upper(t_flags *flags, va_list args);
 int		print_p(t_flags *flags, va_list args);
 int		print_f(t_flags *flags, va_list args);
-<<<<<<< HEAD
-int     print_c(t_flags	*flags, va_list args);
-=======
 int		ft_write_char(char c, t_flags *flags);
 void	display_sign(intmax_t nb, t_flags *flags);
 void	get_number_size(uintmax_t nb, uintmax_t str_len, int *size);
@@ -85,6 +78,6 @@ uintmax_t	get_number_u(t_flags *flags, va_list args);
 intmax_t     get_number(t_flags *flags, va_list args);
 void	ft_putnbr_maxint_u(uintmax_t nb, char *str, uintmax_t str_len, t_flags *flags);
 int		ft_pad_nb(t_flags *flags, va_list args, char *base, char *hash_key);
->>>>>>> master
+int     print_c(t_flags	*flags, va_list args);
 
 #endif

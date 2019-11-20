@@ -12,7 +12,7 @@ CFLAGS	= -Wall -Wextra -g
 
 # src / obj files
 SRC		= main.c fields.c float_tools.c print_f.c ft_printf.c number_tools.c parse_field.c \
-			print_d.c print_o_x.c print_p.c print_s.c print_u.c
+			print_d.c print_o_x.c print_p.c print_s.c print_u.c print_c.c
 
 OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))
 
