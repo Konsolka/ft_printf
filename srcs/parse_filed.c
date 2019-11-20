@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 13:22:22 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/14 17:36:22 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/20 14:48:06 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ int		handle_precision(char **str, t_flags *flags, va_list args)
 	if (**str == '.')
 	{
 		*str += 1;
+		if (**str == '0')
+			*str += 1;
 		if (!ft_isdigit(**str) && **str != '*')
 		{
 			flags->precision = -1;
