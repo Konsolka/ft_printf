@@ -42,21 +42,46 @@ static void		handle_int(double *nb, char **str, int *i, double mod)
 	}
 }
 
+void reverse(char *str, int len)
+{
+	int i=0, j=len-1, temp;
+	while (i<j)
+	{
+		temp = str[i];
+		str[i] = str[j];
+		str[j] = temp;
+		i++; j--;
+	}
+}
+
 static void		handle_dec(char **str, int *i, double nb, int prec)
 {
 	int		j;
-	int		temp;
+	unsigned long long scale;
+	unsigned long long		temp;
 	char	*s;
+	char	*point;
 	
-	nb *= 10;
+	if (!(point = (char *)malloc(sizeof(char) * prec)))
+		return ;
+	scale = 1.0;
+	j = 0;
+	while (j++ < prec)
+		scale *= 10.0;
+	j = 0;
+	temp = nb * scale;
+	while (j < prec)
+	{
+		point[j++] = '0' + (temp % 10);
+		temp /= 10;
+	}
+	point[j] = '\0';
+	reverse(point, ft_strlen(point));
+	s[(*i)++] = '.';
 	j = 0;
 	s = *str;
-	s[(*i)++] = '.';
-	printf("== %d ==", (int)294921.123);
-	while (j++ <= prec)
-	{
-		j++;
-	}
+	while (j < prec)
+		s[(*i)++] = point[j++];
 }
 
 static int		handle_inf(char **s)
