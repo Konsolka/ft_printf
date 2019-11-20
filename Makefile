@@ -34,12 +34,14 @@ obj:
 $(FT_LIB):
 	make -C $(FT)
 
+$(OBJDIR)%.o:$(SRCDIR)%.c
+	$(CC) $(CFLAGS) $(FT_INC) -I $(INCDIR) -o $@ -c $<
+
 $(NAME): $(OBJ)
+	cp libft/libft.a ./$(NAME)
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
 
-$(OBJDIR)%.o:$(SRCDIR)%.c
-	$(CC) $(CFLAGS) $(FT_INC) -I $(INCDIR) -o $@ -c $<
 
 clean:
 	rm -rf $(OBJDIR)

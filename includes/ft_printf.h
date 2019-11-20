@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 11:37:38 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/20 15:40:52 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/20 16:04:39 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int		ft_pad(t_flags *flags, int size);
 int		ft_write(void *s, int size, t_flags *flags);
 int		write_untill(char **format, t_flags *flags);
 int		call_type(char **str, va_list args, t_flags *flags);
-void	init_flags(t_flags *flags);
 int		handle_flags(char **str, t_flags *flags);
 int		handle_width(char **str, t_flags *flags, va_list args);
 int		handle_precision(char **str, t_flags *flags, va_list args);
