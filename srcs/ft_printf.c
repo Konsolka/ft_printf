@@ -6,7 +6,7 @@
 /*   By: abenton <abenton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 13:49:30 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/20 17:30:43 by abenton          ###   ########.fr       */
+/*   Updated: 2019/11/20 17:38:43 by abenton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,18 @@ t_type	g_type[ARGS] = {
 	// {'A', print_a_upper}, {'n', print_n}, {'p', print_p}, {'s', print_s},
 	// {'S', print_s_upper}, {'Z', print_z_upper}
 };
+
+static void	init_flags(t_flags *flags)
+{
+	flags->precision = 0;
+	flags->minus = 0;
+	flags->plus = 0;
+	flags->hash = 0;
+	flags->zero = 0;
+	flags->space = 0;
+	flags->width = 0;
+	flags->length = -1;
+}
 
 static int		handle(char **str, va_list args, t_flags *flags)
 {
@@ -84,9 +96,9 @@ int		ft_printf(const char * restrict format, ...)
 	t_flags flags;
 	va_list	args;
 	char	*str;
-	int		bytes;
+	int		return_value;
 
-	bytes = 0;
+	return_value = 0;
 	flags.byte = 0;
 	flags.byte_total = 0;
 	va_start(args, format);
@@ -96,13 +108,13 @@ int		ft_printf(const char * restrict format, ...)
 		if (*str == '%')
 		{
 			str++;
-			bytes += handle(&str, args, &flags);
+			return_value += handle(&str, args, &flags);
 		}
 		else
-			bytes += write_untill(&str, &flags);
+			return_value += write_untill(&str, &flags);
 	}
 	va_end(args);
 	if (flags.byte > 0)
 		write(1, flags.buff, (size_t)flags.byte);
-	return (bytes);
+	return (return_value);
 }

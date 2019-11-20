@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   float.c                                            :+:      :+:    :+:   */
+/*   print_p.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: abenton <abenton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/17 15:13:19 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/17 15:30:44 by mburl            ###   ########.fr       */
+/*   Created: 2019/11/17 15:05:02 by mburl             #+#    #+#             */
+/*   Updated: 2019/11/20 17:38:45 by abenton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		print_f(t_flags *flags, va_list args)
+int		print_p(t_flags *flags, va_list args)
 {
-	char	*nb;
-	int		size;
-
-	if (flags->precision <= 0)
-		flags->precision = 7;
-	size = ft_float_to_str(va_arg(args, double), &nb, flags->precision);
-	ft_write(nb, size, flags);
-	free(nb);
-	return (size);
+	flags->length = LEN_TYPE_L;
+	flags->hash = 1;
+	return (print_x(flags, args));
 }
