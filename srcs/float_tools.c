@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 15:16:46 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/18 15:36:49 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/20 17:58:39 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,11 @@ static void		handle_dec(char **str, int *i, double nb, int prec)
 	j = 0;
 	s = *str;
 	s[(*i)++] = '.';
-	while (j++ < prec)
+	printf("== %d ==", (int)294921.123);
+	while (j++ <= prec)
 	{
-		temp = ((int)nb != 9) ? (int)(nb + 0.01) : (int)(nb);
-		s[(*i)++] = (char)(temp + 48);
-		nb = (nb - temp) * 10;
+		j++;
 	}
-	if ((int)(nb * 10) >= 5)
-		s[--*(i)] += 1;
 }
 
 static int		handle_inf(char **s)

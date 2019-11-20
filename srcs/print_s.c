@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 12:26:39 by abenton           #+#    #+#             */
-/*   Updated: 2019/11/20 14:43:12 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/20 18:15:53 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ int		print_s(t_flags	*flags, va_list args)
 	}
 	if (!flags->width || !flags->minus)
 		ft_write((s) ? s : "(null)", len, flags);
+	free(s);
 	return (len + (flags->width - len > 0 ? flags->width - len : 0));
 }
