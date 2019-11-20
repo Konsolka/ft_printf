@@ -12,8 +12,8 @@ CC		= gcc
 CFLAGS	= -Wall -Wextra -g
 
 # src / obj files
-SRC		= main.c parse_filed.c lst_work.c ft_printf.c fields.c print_d.c print_s.c pointer.c float.c float_tools.c
-
+SRC		= main.c fields.c float_tools.c print_f.c ft_printf.c number_tools.c parse_field.c \
+			print_d.c print_o_x.c print_p.c print_s.c print_u.c
 OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))
 
 # ft library
@@ -46,4 +46,4 @@ fclean: clean
 	rm -rf $(NAME)
 	make -C $(FT) fclean
 
-re: fclean all%
+re: fclean all

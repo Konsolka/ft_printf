@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 11:37:38 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/18 15:21:37 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/20 15:40:52 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct	s_flags
 	int		space;
 	int		width;
 	int		precision;
-	int		len;
+	int		length;
 	char	type;
 	char	buff[BUFF_SIZE];
 	int		byte;
@@ -72,5 +72,12 @@ int		print_s(t_flags	*flags, va_list args);
 int		print_x_upper(t_flags *flags, va_list args);
 int		print_p(t_flags *flags, va_list args);
 int		print_f(t_flags *flags, va_list args);
+int		ft_write_char(char c, t_flags *flags);
+void	display_sign(intmax_t nb, t_flags *flags);
+void	get_number_size(uintmax_t nb, uintmax_t str_len, int *size);
+uintmax_t	get_number_u(t_flags *flags, va_list args);
+intmax_t     get_number(t_flags *flags, va_list args);
+void	ft_putnbr_maxint_u(uintmax_t nb, char *str, uintmax_t str_len, t_flags *flags);
+int		ft_pad_nb(t_flags *flags, va_list args, char *base, char *hash_key);
 
 #endif

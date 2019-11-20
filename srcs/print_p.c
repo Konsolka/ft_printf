@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_work.c                                         :+:      :+:    :+:   */
+/*   print_p.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/13 13:56:42 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/14 16:14:52 by mburl            ###   ########.fr       */
+/*   Created: 2019/11/17 15:05:02 by mburl             #+#    #+#             */
+/*   Updated: 2019/11/20 15:34:38 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	init_flags(t_flags *flags)
+int		print_p(t_flags *flags, va_list args)
 {
-	flags->precision = 0;
-	flags->minus = 0;
-	flags->plus = 0;
-	flags->hash = 0;
-	flags->zero = 0;
-	flags->space = 0;
-	flags->width = 0;
-	flags->len = -1;
+	flags->length = LEN_TYPE_L;
+	flags->hash = 1;
+	return (print_x(flags, args));
 }

@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 12:02:37 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/15 13:01:46 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/20 15:38:50 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,9 @@ int		write_untill(char **format, t_flags *flags)
 	ft_write(*format, next, flags);
 	*format += next;
 	return (next);
+}
+
+int		ft_write_char(char c, t_flags *flags)
+{
+	return (ft_write(&c, 1, flags));
 }
