@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: abenton <abenton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 11:37:38 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/17 15:30:38 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/20 17:30:54 by abenton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,6 @@ int		print_s(t_flags	*flags, va_list args);
 int		print_x_upper(t_flags *flags, va_list args);
 int		print_p(t_flags *flags, va_list args);
 int		print_f(t_flags *flags, va_list args);
+int     print_c(t_flags	*flags, va_list args);
 
 #endif
