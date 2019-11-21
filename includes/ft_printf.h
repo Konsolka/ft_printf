@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 11:37:38 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/20 16:04:39 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/21 15:14:15 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int		print_s(t_flags	*flags, va_list args);
 int		print_x_upper(t_flags *flags, va_list args);
 int		print_p(t_flags *flags, va_list args);
 int		print_f(t_flags *flags, va_list args);
+int     print_c(t_flags	*flags, va_list args);
 int		ft_write_char(char c, t_flags *flags);
 void	display_sign(intmax_t nb, t_flags *flags);
 void	get_number_size(uintmax_t nb, uintmax_t str_len, int *size);

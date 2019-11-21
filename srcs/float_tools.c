@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 15:16:46 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/20 17:58:39 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/21 15:06:03 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,28 +60,18 @@ static void		handle_dec(char **str, int *i, double nb, int prec)
 	unsigned long long scale;
 	unsigned long long		temp;
 	char	*s;
-	char	*point;
 	
-	if (!(point = (char *)malloc(sizeof(char) * prec)))
-		return ;
-	scale = 1.0;
-	j = 0;
-	while (j++ < prec)
-		scale *= 10.0;
-	j = 0;
-	temp = nb * scale;
-	while (j < prec)
-	{
-		point[j++] = '0' + (temp % 10);
-		temp /= 10;
-	}
-	point[j] = '\0';
-	reverse(point, ft_strlen(point));
-	s[(*i)++] = '.';
+
+	nb *= 10;
 	j = 0;
 	s = *str;
-	while (j < prec)
-		s[(*i)++] = point[j++];
+	s[(*i)++] = '.';
+	while (j++ < prec)
+	{
+		temp = ((int)nb != 9) ? (int)(nb + 0.01) : (int)nb;
+		s[(*i)++] = '0' + temp;
+		nb = (nb - temp) * 10;
+	}
 }
 
 static int		handle_inf(char **s)
