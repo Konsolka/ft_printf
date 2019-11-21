@@ -6,13 +6,25 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 15:16:46 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/21 15:06:03 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/21 18:29:08 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include <stdlib.h>
 #include "ft_printf.h"
+
+
+
+#define PSH(X) (*(buf++)=(X))
+#define PSH1(X) (*(buf--)=(X))
+#define PEEK() buf[-1]
+#define POP() *(--buf) = '\0'
+
+#define PLUS 1
+#define SPACE 2
+
+
 
 static double	calc_mod(double nb, int *size)
 {
@@ -56,22 +68,39 @@ void reverse(char *str, int len)
 
 static void		handle_dec(char **str, int *i, double nb, int prec)
 {
-	int		j;
-	unsigned long long scale;
-	unsigned long long		temp;
-	char	*s;
-	
+	unsigned long long	z;
+	double				scal;
+	int		 			iterartor;
+	char				*s;
+	char				*buf;
 
-	nb *= 10;
-	j = 0;
+	if (prec == 0)
+		return ;
+	if (!(buf = (char *)malloc(sizeof(char) * prec + 1)))
+		return ;
 	s = *str;
-	s[(*i)++] = '.';
-	while (j++ < prec)
+  	if (prec > 20)
+		prec = 20;
+	scal = 1;
+	iterartor = prec;
+	while (iterartor-- > 0)
+		scal *= 10;
+	z = nb * scal + 0.5;
+	iterartor = 0;
+	while (iterartor < prec)
 	{
-		temp = ((int)nb != 9) ? (int)(nb + 0.01) : (int)nb;
-		s[(*i)++] = '0' + temp;
-		nb = (nb - temp) * 10;
+		buf[iterartor] = '0' + (z % 10);
+		z /= 10;
+		iterartor++;
 	}
+	buf[iterartor] = '.';
+	reverse(buf, (int)ft_strlen(buf));
+	iterartor = 0;
+	while (buf[iterartor])
+	{
+		s[(*i)++] = buf[iterartor++];
+	}
+	free(buf);
 }
 
 static int		handle_inf(char **s)
@@ -105,7 +134,9 @@ int				ft_gcvt(double nb, char **s, int prec)
 		str[i++] = '-';
 	handle_int(&nb, &str, &i, mod);
 	handle_dec(&str, &i, nb, prec);
-	str[--i] = '\0';
+	printf("== %s == ", str);
+	str[i] = '\0';
+	printf("== %s == ", str);
 	*s = str;
 	return (size);
 }

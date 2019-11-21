@@ -1,8 +1,8 @@
-NAME	= libftprintf
+C = clang
 
-LIBFT	= libft
+NAME = libftprintf.a
+NAME_C = libftprintf
 
-# directories
 SRCDIR	= ./srcs/
 INCDIR	= ./includes/
 OBJDIR	= ./obj/
@@ -23,21 +23,32 @@ FT_LIB	= $(addprefix $(FT),libft.a)
 FT_INC	= -I ./libft
 FT_LNK	= -L ./libft -lft
 
+SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
+
+OBJS = $(addprefix $(DIR_O)/,$(SOURCES:.c=.o))
 
 all: obj $(FT_LIB) $(NAME)
 
 obj:
 	mkdir -p $(OBJDIR)
 
-$(OBJDIR)%.o:$(SRCDIR)%.c
-	$(CC) -g $(CFLAGS) $(FT_INC) -I $(INCDIR) -o $@ -c $<
-
 $(FT_LIB):
 	make -C $(FT)
 
-$(NAME): $(OBJ)
-	$(CC) -g $(OBJ) $(FT_LNK) -o $(NAME)
+$(OBJDIR)%.o:$(SRCDIR)%.c
+	$(CC) $(CFLAGS) $(FT_INC) -I $(INCDIR) -o $@ -c $<
 
+$(NAME): $(OBJ)
+	cp libft/libft.a ./$(NAME)
+	@ar rc $(NAME) $(OBJ)
+	@ranlib $(NAME)
+
+lib: obj $(FT_LIB) $(NAME)
+
+$(NAME): $(OBJ)
+	cp libft/libft.a ./$(NAME)
+	@ar rc $(NAME) $(OBJ)
+	@ranlib $(NAME)
 
 clean:
 	rm -rf $(OBJDIR)
