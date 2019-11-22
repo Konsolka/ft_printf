@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 11:37:38 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/21 17:01:42 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/22 15:29:16 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,10 @@ uintmax_t	get_number_u(t_flags *flags, va_list args);
 intmax_t     get_number(t_flags *flags, va_list args);
 void	ft_putnbr_maxint_u(uintmax_t nb, char *str, uintmax_t str_len, t_flags *flags);
 int		ft_pad_nb(t_flags *flags, va_list args, char *base, char *hash_key);
-char	*ftf_gcvt(double f, int ndigit);
+
+
+
+
+int			sv_gcvt(double f, char **s, int prec);
 
 #endif
