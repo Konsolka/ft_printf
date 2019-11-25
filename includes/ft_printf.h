@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 11:37:38 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/22 15:29:16 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/25 15:26:59 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,6 @@ int		ft_pad_nb(t_flags *flags, va_list args, char *base, char *hash_key);
 
 
 
-int			sv_gcvt(double f, char **s, int prec);
+int			sv_gcvt(double f, char **s, int prec, t_flags *flags);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 15:16:46 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/22 16:51:44 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/25 15:43:43 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,6 @@ int				ft_gcvt(double nb, char **s, int prec)
 	i = 0;
 	if (neg)
 		str[i++] = '-';
-	handle_int(&nb, &str, &i, mod);
-	handle_dec(&str, &i, nb, prec);
 	str[i] = '\0';
 	*s = str;
 	return (size);
@@ -91,7 +89,6 @@ int			ft_numlen(double nb)
 	int			i;
 	uintmax_t	newnb;
 
-	i = 0;
 	newnb = (uintmax_t)nb;
 	if (newnb == 0)
 		return (1);
@@ -104,7 +101,7 @@ int			ft_numlen(double nb)
 }
 
 
-int			sv_gcvt(double f, char **s, int prec)
+int			sv_gcvt(double f, char **s, int prec, t_flags *flags)
 {
 	int i;
 	uintmax_t z, k;
@@ -131,7 +128,7 @@ int			sv_gcvt(double f, char **s, int prec)
 	if (!f)
 	{
 	    buf[j++] = '0';
-	    if (prec > 0)
+	    if (prec > 0 || flags->hash == 1)
 	        buf[j++] = '.';
 	    for (i = 0; i < prec; i++)
 			buf[j++] = '0';
@@ -149,16 +146,17 @@ int			sv_gcvt(double f, char **s, int prec)
 	            buf[j++] = '0' + (z % 10);
 	            z /= 10;
 	        }
-			buf[j++] = '.';
 	    } // если flags->hash == 1 и пресижн == 0 то надо отобразить точку
+		if (flags->hash == 1 || prec > 0)
+			buf[j++] = '.';
 	    do
 		{
 			buf[j++] = '0' + (k % 10);
 	        k /= 10;
 	    } while (k);
 	}
-	if (sign)
-		buf[j++] = '-';
+	if (sign || flags->plus)
+		buf[j] = (sign == 1) ? '-' : '+';
 	reverse(buf, ft_strlen(buf));
 	*s = buf;
 	return (ft_strlen(buf));
