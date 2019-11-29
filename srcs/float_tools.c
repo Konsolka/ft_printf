@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 15:16:46 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/29 11:50:11 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/29 15:05:05 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int			ft_numlen(double nb)
 	int			i;
 	uintmax_t	newnb;
 
+	i = 0;
 	newnb = (uintmax_t)nb;
 	if (newnb == 0)
 		return (1);
@@ -108,22 +109,27 @@ void		ft_pad_float(char **str, int *size, t_flags *flags, int sign)
 	int		i;
 
 	size_temp = ((flags->width > *size) ? flags->width : *size) + flags->plus + flags->space;
+	// printf("---%i   %i", size_temp, *size);
 	temp = ft_strnew(size_temp);
 	i = 0;
+	if ((sign || flags->plus) && flags->zero)
+		temp[i++] = (sign == 1) ? '-' : '+';
+	else
+		flags->width--;
+	
 	if (flags->minus == 0)
-	{
 		while (i < flags->width - *size)
-			temp[i++] = ' ';
-	}
-	else if (flags->zero == 1)
-		while (i < flags->width - *size)
-			temp[i++] = '0';
-	printf("%se", temp);
+			temp[i++] = (flags->zero == 1) ? '0' : ' ';
+	if ((sign || flags->plus) && !flags->zero)
+		temp[i++] = (sign == 1) ? '-' : '+';
 	temp = ft_strcat(temp, *str);
 	i = ft_strlen(temp);
-	if (flags->minus == 1)
-		while (i < flags->width)
+	if (flags->minus)
+		while (i <= flags->width)
 			temp[i++] = ' ';
+	*size = ft_strlen(temp);
+	*str = ft_strcpy(*str, temp);
+	free(temp);
 }
 
 int			sv_gcvt(double f, char **s, int prec, t_flags *flags)
@@ -142,8 +148,10 @@ int			sv_gcvt(double f, char **s, int prec, t_flags *flags)
 	    sign = 1;
 	    f = -f;
 	}
-	size = sign + ft_numlen(f) + 1 - ((flags->precision == 0) ? 1 : 0) + prec;
-	//printf("%i\n", size);
+	size = ((flags->plus == 1) ? 1 : sign) +
+		((flags->width > ft_numlen(f) + prec) ? flags->width : ft_numlen(f) + prec + 1)
+		- ((!flags->precision) ? 1 : 0) + ((flags->hash) ? 1 : 0);
+	printf("---%i----", size);
 	buf = ft_strnew(size);
 	scal = 1.0;
 	i = prec;
@@ -151,6 +159,9 @@ int			sv_gcvt(double f, char **s, int prec, t_flags *flags)
 		scal *= 10.0;
 	k = f + 0.5 / scal;
 	f2 = f - k;
+	if (!flags->width)
+		while(j <= flags->width - ft_numlen(f) - prec)
+			buf[j++] = ' ';
 	if (!f)
 	{
 	    buf[j++] = '0';
@@ -181,10 +192,13 @@ int			sv_gcvt(double f, char **s, int prec, t_flags *flags)
 	        k /= 10;
 	    } while (k);
 	}
-	if (sign || flags->plus)
-		buf[j++] = (sign == 1) ? '-' : '+';
-	reverse(buf, size);
-	ft_pad_float(&buf, &size, flags, sign);
+	if (flags->zero == 0 && (flags->plus || sign))
+		buf[j++] = (sign) ? '-' : '+';
+	if (flags->minus == 0)
+		while (j <= size - ft_numlen(f) - prec)
+			buf[j++] = (flags->zero == 1) ? '0' : ' ';
+	reverse(buf, ft_strlen(buf));
+	buf[ft_strlen(buf)] = 0;
 	*s = buf;
 	return (size);
 }
