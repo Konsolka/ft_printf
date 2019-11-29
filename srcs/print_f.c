@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 15:13:19 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/25 16:05:28 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/29 11:06:45 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,7 @@ int		print_f(t_flags *flags, va_list args)
 	if (flags->length != LEN_TYPE_L_LAR)
 		cast = va_arg(args, double);
 	size = sv_gcvt(cast, &nb, flags->precision, flags);
-	if (flags->minus == 0)
-		ft_pad(flags, size);
 	ft_write(nb, size, flags);
-	if (flags->minus == 1)
-		ft_pad(flags, size);
 	free(nb);
 	return (size);
 }
