@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: abenton <abenton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 11:07:13 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/21 15:10:57 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/29 16:31:54 by abenton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,12 @@
 #include <stdio.h>
 #include "ft_printf.h"
 
-int				main(void){
-	printf("%-3.8s", NULL);
-	ft_printf("%-3.8s", NULL);
+int				main(void)
+{
+	printf("%c", 'a');
+//	ft_printf("%c", 'a');
+//	ft_printf("%b", 7);
+//	printf("%-3.8s", NULL);
+//	ft_printf("%-3.8s", NULL);
   return (0);
 }

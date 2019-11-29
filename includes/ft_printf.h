@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: abenton <abenton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 11:37:38 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/21 15:14:15 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/29 16:18:47 by abenton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,8 @@ uintmax_t	get_number_u(t_flags *flags, va_list args);
 intmax_t     get_number(t_flags *flags, va_list args);
 void	ft_putnbr_maxint_u(uintmax_t nb, char *str, uintmax_t str_len, t_flags *flags);
 int		ft_pad_nb(t_flags *flags, va_list args, char *base, char *hash_key);
+
+int         print_n(t_flags *flags, va_list args);
+int		print_b(t_flags *flags, va_list args);
 
 #endif
