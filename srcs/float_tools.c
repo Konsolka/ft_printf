@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 15:16:46 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/29 15:05:05 by mburl            ###   ########.fr       */
+/*   Updated: 2019/11/29 17:12:21 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,39 +100,43 @@ int			ft_numlen(double nb)
 	}
 	return (i);
 }
-
-void		ft_pad_float(char **str, int *size, t_flags *flags, int sign)
+void	display_sign_float(double nb, t_flags *flags)
 {
-	char	*s;
-	char	*temp;
-	int		size_temp;
-	int		i;
-
-	size_temp = ((flags->width > *size) ? flags->width : *size) + flags->plus + flags->space;
-	// printf("---%i   %i", size_temp, *size);
-	temp = ft_strnew(size_temp);
-	i = 0;
-	if ((sign || flags->plus) && flags->zero)
-		temp[i++] = (sign == 1) ? '-' : '+';
-	else
-		flags->width--;
-	
-	if (flags->minus == 0)
-		while (i < flags->width - *size)
-			temp[i++] = (flags->zero == 1) ? '0' : ' ';
-	if ((sign || flags->plus) && !flags->zero)
-		temp[i++] = (sign == 1) ? '-' : '+';
-	temp = ft_strcat(temp, *str);
-	i = ft_strlen(temp);
-	if (flags->minus)
-		while (i <= flags->width)
-			temp[i++] = ' ';
-	*size = ft_strlen(temp);
-	*str = ft_strcpy(*str, temp);
-	free(temp);
+	if (nb < 0.0)
+		ft_write("-", 1, flags);
+	if (flags->plus && nb >= 0.0)
+		ft_write("+", 1, flags);
+	else if (flags->space && nb >= 0.0)
+		ft_write(" ", 1, flags);
 }
 
-int			sv_gcvt(double f, char **s, int prec, t_flags *flags)
+int		ft_pad_float(char *str, int size, t_flags *flags, double nb)
+{
+	int		width_size;
+	int		width;
+
+	width = 0;
+	width_size = 0;
+	if (!flags->minus)
+	{
+		if (flags->width && flags->zero)
+		{
+			display_sign_float(nb, flags);
+			width_size++;
+		}
+		width_size = ft_pad(flags, size) - size;
+	}
+	if ((flags->width && (flags->minus || !flags->zero)) || !flags->width)
+	{
+		display_sign_float(nb, flags);
+		width_size++;
+	}
+	if (size > 0) //&& ((flags->width || flags->precision)  && !flags->plus && nb) not and may be xor
+		ft_write(str, ft_strlen(str), flags);
+	return (size + width_size);
+}
+
+int			sv_gcvt(double f, char **s, t_flags *flags)
 {
 	int i;
 	uintmax_t z, k;
@@ -148,43 +152,37 @@ int			sv_gcvt(double f, char **s, int prec, t_flags *flags)
 	    sign = 1;
 	    f = -f;
 	}
-	size = ((flags->plus == 1) ? 1 : sign) +
-		((flags->width > ft_numlen(f) + prec) ? flags->width : ft_numlen(f) + prec + 1)
-		- ((!flags->precision) ? 1 : 0) + ((flags->hash) ? 1 : 0);
-	printf("---%i----", size);
+	size = ft_numlen(f) + flags->precision + 1 - ((flags->precision) ? 0 : 1) + ;
 	buf = ft_strnew(size);
 	scal = 1.0;
-	i = prec;
+	i = flags->precision;
 	while (i-- > 0)
 		scal *= 10.0;
 	k = f + 0.5 / scal;
 	f2 = f - k;
-	if (!flags->width)
-		while(j <= flags->width - ft_numlen(f) - prec)
-			buf[j++] = ' ';
 	if (!f)
 	{
 	    buf[j++] = '0';
-	    if (prec > 0 || flags->hash == 1)
+	    if (flags->precision > 0 || flags->hash == 1)
 	        buf[j++] = '.';
-	    for (i = 0; i < prec; i++)
+	    for (i = 0; i < flags->precision; i++)
 			buf[j++] = '0';
 	    buf[size] = 0;
 	}
 	else 
 	{
 	    i = 1;
-	    if (prec > 0)
+	    if (flags->precision > 0)
 		{
 	        t = f2 * scal;
 	        z = (uintmax_t)(t + 0.5);
-	        for (i = 0; i < prec; i++)
+	        for (i = 0; i < flags->precision; i++)
 			{
 	            buf[j++] = '0' + (z % 10);
 	            z /= 10;
 	        }
 	    } // если flags->hash == 1 и пресижн == 0 то надо отобразить точку
-		if (flags->hash == 1 || prec > 0)
+		if (flags->hash == 1 || flags->precision > 0)
 			buf[j++] = '.';
 	    do
 		{
@@ -192,13 +190,10 @@ int			sv_gcvt(double f, char **s, int prec, t_flags *flags)
 	        k /= 10;
 	    } while (k);
 	}
-	if (flags->zero == 0 && (flags->plus || sign))
-		buf[j++] = (sign) ? '-' : '+';
-	if (flags->minus == 0)
-		while (j <= size - ft_numlen(f) - prec)
-			buf[j++] = (flags->zero == 1) ? '0' : ' ';
 	reverse(buf, ft_strlen(buf));
-	buf[ft_strlen(buf)] = 0;
+	// printf("--size = %i--", ft_numlen(f) + flags->precision + 1 - ((flags->precision) ? 0 : 1));
+	size = ft_pad_float(buf, size, flags, ((sign) ? -f : f));
+	size = (flags->minus) ? ft_pad(flags, size) : size;
 	*s = buf;
 	return (size);
 }
