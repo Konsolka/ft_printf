@@ -6,7 +6,7 @@
 /*   By: abenton <abenton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 11:07:13 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/29 16:31:54 by abenton          ###   ########.fr       */
+/*   Updated: 2019/11/29 17:10:19 by abenton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@
 
 int				main(void)
 {
-	printf("%c", 'a');
+//	printf("%c", 'a');
+	printf("%1.1o-\n", 10);
 //	ft_printf("%c", 'a');
-//	ft_printf("%b", 7);
+	ft_printf("%1.1o-\n", 10);
 //	printf("%-3.8s", NULL);
 //	ft_printf("%-3.8s", NULL);
   return (0);

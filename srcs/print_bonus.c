@@ -6,7 +6,7 @@
 /*   By: abenton <abenton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 12:51:14 by abenton           #+#    #+#             */
-/*   Updated: 2019/11/29 16:20:40 by abenton          ###   ########.fr       */
+/*   Updated: 2019/11/29 16:59:35 by abenton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,8 @@ int         print_n(t_flags *flags, va_list args)
 
 /*
 	перевод числа в двоичное
-*/
 
-static int		ft_base(intmax_t value, int base)
+static int		ft_base(intmax_t value, int base, t_flags *flags)
 {
 	int 		len;
 	intmax_t 	value2;
@@ -46,11 +45,12 @@ static int		ft_base(intmax_t value, int base)
 		value /= base;
 	}
 	len = ft_strlen(result);
-	write(1, result, len);
+	ft_write(result, len, flags);
 	free(result);
 	free(result2);
 	return (len);
 }
+*/
 
 /*
 	длина чсила в двоичном виде
@@ -81,9 +81,13 @@ int			print_b(t_flags *flags, va_list args)
 	nbr_len = ft_nbr_len(nbr, 2);
 	len = 0;
 	len = nbr_len + ((flags->precision == -1) ? 0 : len);
+	if (flags->space)
+	{
+		ft_write(" ", 1, flags);
+		len += 1;
+	}
 	if (flags->precision > 0 && flags->precision < len && len > 0)
 		len = flags->precision;
-	nbr = ft_base(nbr, 2);
 	if (flags->width)
 	{
 		if (flags->minus)
