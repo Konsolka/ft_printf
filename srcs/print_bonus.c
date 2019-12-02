@@ -6,7 +6,7 @@
 /*   By: abenton <abenton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 12:51:14 by abenton           #+#    #+#             */
-/*   Updated: 2019/12/02 13:38:44 by abenton          ###   ########.fr       */
+/*   Updated: 2019/12/02 14:36:43 by abenton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int			print_b(t_flags *flags, va_list args)
 	if (flags->precision != 0)
 		flags->zero = 0;
 	len = 0;
-	nbr = va_arg(args, unsigned int);
+	nbr = get_number_u(flags, args);
 	if (flags->precision >= 0 || nbr > 0)
 		nbr_len = ft_nbr_len(nbr, 2);
 	if (flags->hash && (nbr > 0 || flags->precision < 0))
