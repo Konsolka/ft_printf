@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 15:16:46 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/29 17:12:21 by mburl            ###   ########.fr       */
+/*   Updated: 2019/12/02 13:11:49 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,17 +120,11 @@ int		ft_pad_float(char *str, int size, t_flags *flags, double nb)
 	if (!flags->minus)
 	{
 		if (flags->width && flags->zero)
-		{
 			display_sign_float(nb, flags);
-			width_size++;
-		}
 		width_size = ft_pad(flags, size) - size;
 	}
 	if ((flags->width && (flags->minus || !flags->zero)) || !flags->width)
-	{
 		display_sign_float(nb, flags);
-		width_size++;
-	}
 	if (size > 0) //&& ((flags->width || flags->precision)  && !flags->plus && nb) not and may be xor
 		ft_write(str, ft_strlen(str), flags);
 	return (size + width_size);
@@ -152,7 +146,8 @@ int			sv_gcvt(double f, char **s, t_flags *flags)
 	    sign = 1;
 	    f = -f;
 	}
-	size = ft_numlen(f) + flags->precision + 1 - ((flags->precision) ? 0 : 1) + ;
+	size = ft_numlen(f) + flags->precision + 1 - ((flags->precision || flags->hash) ? 0 : 1) +
+		((sign) ? 1 : 0) + (!sign && (flags->plus || flags->space));
 	buf = ft_strnew(size);
 	scal = 1.0;
 	i = flags->precision;
@@ -193,6 +188,7 @@ int			sv_gcvt(double f, char **s, t_flags *flags)
 	reverse(buf, ft_strlen(buf));
 	// printf("--size = %i--", ft_numlen(f) + flags->precision + 1 - ((flags->precision) ? 0 : 1));
 	size = ft_pad_float(buf, size, flags, ((sign) ? -f : f));
+	
 	size = (flags->minus) ? ft_pad(flags, size) : size;
 	*s = buf;
 	return (size);
