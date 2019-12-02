@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 17:09:24 by abenton           #+#    #+#             */
-/*   Updated: 2019/12/02 13:08:08 by mburl            ###   ########.fr       */
+/*   Updated: 2019/12/02 16:55:13 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,15 @@ int		display_d(t_flags *flags, int size, int prec, intmax_t nb)
 			display_sign(nb, flags);
 		width_size = ft_pad(flags, size) - size;
 	}
+	if (flags->precision == -2 && flags->width && !flags->minus)
+		ft_write(" ", 1, flags);
 	if ((flags->width && (flags->minus || !flags->zero)) || !flags->width)
 		display_sign(nb, flags);
+		if (flags->precision == -2 && flags->width && flags->minus)
+		ft_write(" ", 1, flags);
 	while (width++ < prec)
 		ft_write("0", 1, flags);
-	if (size > 0) //&& ((flags->width || flags->precision)  && !flags->plus && nb) not and may be xor
+	if (size > 0 && !(nb == 0 && (flags->precision == -2)))
 		ft_putnbr_maxint_u((nb < 0 ? -nb : nb), "0123456789", 10, flags);
 	return (size + width_size);
 }
@@ -91,7 +95,7 @@ int		handle_hash(t_flags *flags, uintmax_t nb, int *size, char *hash_key)
 	prec = 0;
 	if (nb == 0 && flags->type != 'p')
 		flags->hash = 0;
-	if (flags->hash && (!flags->width || flags->minus || flags->zero ||
+	if (flags->hash && (flags->minus || !flags->width || flags->zero ||
 			(prec = flags->precision > *size)))
 		ft_write(hash_key, (int)ft_strlen(hash_key), flags);
 	if (flags->hash && ((flags->width) && !prec) && flags->type != 'p')
@@ -112,8 +116,8 @@ int		ft_pad_nb(t_flags *flags, va_list args, char *base, char *hash_key)
 	get_number_size(nb, ft_strlen(base), &size);
 	prec = handle_hash(flags, nb, &size, hash_key);
 	if (flags->precision == -1 && !nb)
-			size = 0;
-		display_padding(flags, nb, &size, base);
+		size = 0;
+	display_padding(flags, nb, &size, base);
 	if (flags->hash && flags->width && !flags->minus && !flags->zero &&
 			!prec)
 		ft_write(hash_key, (int)ft_strlen(hash_key), flags);

@@ -6,11 +6,12 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 15:13:19 by mburl             #+#    #+#             */
-/*   Updated: 2019/12/02 13:25:50 by mburl            ###   ########.fr       */
+/*   Updated: 2019/12/02 15:50:37 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <math.h>
 
 int		print_f(t_flags *flags, va_list args)
 {
@@ -28,7 +29,8 @@ int		print_f(t_flags *flags, va_list args)
 		cast = va_arg(args, long double);
 	else
 		cast = va_arg(args, double);
-	size = sv_gcvt(cast, &nb, flags);
-	free(nb);
+	size = ft_gcvt(cast, &nb, flags);
+	if (cast != INFINITY)
+		free(nb);
 	return (size);
 }

@@ -6,24 +6,13 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 15:16:46 by mburl             #+#    #+#             */
-/*   Updated: 2019/12/02 13:25:54 by mburl            ###   ########.fr       */
+/*   Updated: 2019/12/02 15:53:07 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include <stdlib.h>
 #include "ft_printf.h"
-
-static double	calc_mod(long double nb, int *size)
-{
-	long double mod;
-
-	mod = 1;
-	nb += 0.5;
-	while ((int)(nb /= 10) != 0 && (*size)++)
-		mod *= 10;
-	return (mod);
-}
 
 static void reverse(char *str, int len)
 {
@@ -37,40 +26,11 @@ static void reverse(char *str, int len)
 	}
 }
 
-static int		handle_inf(char **s)
+static int		handle_inf(t_flags *flags)
 {
-	if (!(*s = (char *)malloc(sizeof(char) * 4)))
-		return (0);
-		*s = "inf";
+	ft_write(((flags->type == 'f') ? "inf" : "INF"), 3, flags);
 		return (3);
 }
-
-int				ft_gcvt(long double nb, char **s, int prec)
-{
-	int		i;
-	int		size;
-	char	*str;
-	int		neg;
-	double	mod;
-
-	if (nb == INFINITY)
-		return (handle_inf(s));
-	size = 1;
-	neg = 0;
-	if (nb < 0.0 && size++ && (neg = 1) == 1)
-		nb = -nb;
-	mod = calc_mod((prec == 0) ? nb + 0.5 : nb, &size);
-	size += (prec == 0) ? 0 : prec + 1;
-	if (!(str = (char *)malloc(sizeof(char) * (size + 1))))
-		return (0);
-	i = 0;
-	if (neg)
-		str[i++] = '-';
-	str[i] = '\0';
-	*s = str;
-	return (size);
-}
-
 
 int			ft_numlen(long double nb)
 {
@@ -118,7 +78,7 @@ int		ft_pad_float(char *str, int size, t_flags *flags, long double nb)
 	return (size + width_size);
 }
 
-int			sv_gcvt(long double f, char **s, t_flags *flags)
+int			ft_gcvt(long double f, char **s, t_flags *flags)
 {
 	int i;
 	uintmax_t z, k;
@@ -128,7 +88,8 @@ int			sv_gcvt(long double f, char **s, t_flags *flags)
 	int j;
 	int size;
 
-	// printf("=== %Lf ===", f);
+	if (f == INFINITY)
+		return (handle_inf(flags));
 	j = 0;
 	sign = 0;
 	if (f < 0.0) {

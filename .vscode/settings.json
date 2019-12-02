@@ -16,6 +16,9 @@
 		"utility": "c",
 		"vector": "c",
 		"hashtable": "c",
-		"ios": "c"
+		"ios": "c",
+		"math.h": "c",
+		"ostream": "c",
+		"*.tcc": "c"
 	}
 }
