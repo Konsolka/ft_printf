@@ -6,15 +6,16 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 11:07:13 by mburl             #+#    #+#             */
-/*   Updated: 2019/12/02 13:00:42 by mburl            ###   ########.fr       */
+/*   Updated: 2019/12/02 13:24:14 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include <stdio.h>
 #include "ft_printf.h"
+#include <float.h>
 
 int				main(void){
-	ft_printf("%-5.0f", -7.3);
+	ft_printf("%f", 1.0);
   return (0);
 }

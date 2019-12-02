@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 15:16:46 by mburl             #+#    #+#             */
-/*   Updated: 2019/12/02 13:11:49 by mburl            ###   ########.fr       */
+/*   Updated: 2019/12/02 13:25:54 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,9 @@
 #include <stdlib.h>
 #include "ft_printf.h"
 
-
-
-#define PSH(X) (*(buf++)=(X))
-#define PSH1(X) (*(buf--)=(X))
-#define PEEK() buf[-1]
-#define POP() *(--buf) = '\0'
-
-#define PLUS 1
-#define SPACE 2
-
-
-
-static double	calc_mod(double nb, int *size)
+static double	calc_mod(long double nb, int *size)
 {
-	double mod;
+	long double mod;
 
 	mod = 1;
 	nb += 0.5;
@@ -37,7 +25,7 @@ static double	calc_mod(double nb, int *size)
 	return (mod);
 }
 
-void reverse(char *str, int len)
+static void reverse(char *str, int len)
 {
 	int i=0, j=len-1, temp;
 	while (i<j)
@@ -57,7 +45,7 @@ static int		handle_inf(char **s)
 		return (3);
 }
 
-int				ft_gcvt(double nb, char **s, int prec)
+int				ft_gcvt(long double nb, char **s, int prec)
 {
 	int		i;
 	int		size;
@@ -84,7 +72,7 @@ int				ft_gcvt(double nb, char **s, int prec)
 }
 
 
-int			ft_numlen(double nb)
+int			ft_numlen(long double nb)
 {
 	int			i;
 	uintmax_t	newnb;
@@ -100,7 +88,7 @@ int			ft_numlen(double nb)
 	}
 	return (i);
 }
-void	display_sign_float(double nb, t_flags *flags)
+void	display_sign_float(long double nb, t_flags *flags)
 {
 	if (nb < 0.0)
 		ft_write("-", 1, flags);
@@ -110,7 +98,7 @@ void	display_sign_float(double nb, t_flags *flags)
 		ft_write(" ", 1, flags);
 }
 
-int		ft_pad_float(char *str, int size, t_flags *flags, double nb)
+int		ft_pad_float(char *str, int size, t_flags *flags, long double nb)
 {
 	int		width_size;
 	int		width;
@@ -130,16 +118,17 @@ int		ft_pad_float(char *str, int size, t_flags *flags, double nb)
 	return (size + width_size);
 }
 
-int			sv_gcvt(double f, char **s, t_flags *flags)
+int			sv_gcvt(long double f, char **s, t_flags *flags)
 {
 	int i;
 	uintmax_t z, k;
 	char *buf;
-	double f2, t, scal;
+	long double f2, t, scal;
 	int sign;
 	int j;
 	int size;
 
+	// printf("=== %Lf ===", f);
 	j = 0;
 	sign = 0;
 	if (f < 0.0) {
