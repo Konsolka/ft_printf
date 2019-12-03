@@ -19,6 +19,7 @@
 		"ios": "c",
 		"math.h": "c",
 		"ostream": "c",
-		"*.tcc": "c"
+		"*.tcc": "c",
+		"__locale": "c"
 	}
 }

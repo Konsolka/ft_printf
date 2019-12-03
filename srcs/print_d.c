@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 17:09:24 by abenton           #+#    #+#             */
-/*   Updated: 2019/12/02 16:55:13 by mburl            ###   ########.fr       */
+/*   Updated: 2019/12/03 11:54:14 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ void		display_padding(t_flags *flags, uintmax_t nb, int *size, char *base)
 	while (flags->minus && width++ < prec)
 		ft_write("0", 1, flags);
 	*size = (flags->precision > *size) ? flags->precision : *size;
-	if (flags->minus && flags->precision != -1)
-		ft_putnbr_maxint_u(nb, base, ft_strlen(base), flags);
 	width = 0;
 	while (width++ < flags->width - (*size + (flags->type == 'p' ? 2 : 0)))
 		ft_write((flags->zero && !flags->minus) ? "0" : " ", 1, flags);
