@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 15:16:46 by mburl             #+#    #+#             */
-/*   Updated: 2019/12/02 15:53:07 by mburl            ###   ########.fr       */
+/*   Updated: 2019/12/04 11:13:04 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int		ft_pad_float(char *str, int size, t_flags *flags, long double nb)
 	}
 	if ((flags->width && (flags->minus || !flags->zero)) || !flags->width)
 		display_sign_float(nb, flags);
-	if (size > 0) //&& ((flags->width || flags->precision)  && !flags->plus && nb) not and may be xor
+	if (size > 0)
 		ft_write(str, ft_strlen(str), flags);
 	return (size + width_size);
 }
@@ -107,11 +107,12 @@ int			ft_gcvt(long double f, char **s, t_flags *flags)
 	f2 = f - k;
 	if (!f)
 	{
-	    buf[j++] = '0';
+		i = 0;
+	    while (i++ < flags->precision)
+			buf[j++] = '0';
 	    if (flags->precision > 0 || flags->hash == 1)
 	        buf[j++] = '.';
-	    for (i = 0; i < flags->precision; i++)
-			buf[j++] = '0';
+	    buf[j++] = '0';
 	    buf[size] = 0;
 	}
 	else 
@@ -126,7 +127,7 @@ int			ft_gcvt(long double f, char **s, t_flags *flags)
 	            buf[j++] = '0' + (z % 10);
 	            z /= 10;
 	        }
-	    } // если flags->hash == 1 и пресижн == 0 то надо отобразить точку
+	    }
 		if (flags->hash == 1 || flags->precision > 0)
 			buf[j++] = '.';
 	    do

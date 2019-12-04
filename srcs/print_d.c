@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 17:09:24 by abenton           #+#    #+#             */
-/*   Updated: 2019/12/03 11:54:14 by mburl            ###   ########.fr       */
+/*   Updated: 2019/12/04 11:09:58 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		display_d(t_flags *flags, int size, int prec, intmax_t nb)
 		ft_write(" ", 1, flags);
 	while (width++ < prec)
 		ft_write("0", 1, flags);
-	if (size > 0 && !(nb == 0 && (flags->precision == -2)))
+	if (size > 0 && !(nb == 0 && (flags->precision == -2)) && flags->precision != -1)
 		ft_putnbr_maxint_u((nb < 0 ? -nb : nb), "0123456789", 10, flags);
 	return (size + width_size);
 }
