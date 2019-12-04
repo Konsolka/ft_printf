@@ -1,5 +1,5 @@
-NAME	= libftprintf
-NAME_LIB	= libftprintf.a
+NAME	= libftprintf.a
+NAME_C = libftprintf
 
 LIBFT	= libft
 
@@ -38,14 +38,14 @@ $(FT_LIB):
 	make -C $(FT)
 
 $(NAME): $(OBJ)
-	$(CC) -g $(OBJ) $(FT_LNK) -o $(NAME)
+	cp libft/libft.a ./$(NAME)
+	@ar rc $(NAME) $(OBJ)
+	@ranlib $(NAME)
 
-lib: obj $(FT_LIB) $(NAME_LIB)
+c: obj $(FT_LIB) $(NAME_C)
 
-$(NAME_LIB): $(OBJ)
-	cp libft/libft.a ./$(NAME_LIB)
-	@ar rc $(NAME_LIB) $(OBJ)
-	@ranlib $(NAME_LIB)
+$(NAME_C): $(OBJ)
+	$(CC) -g $(OBJ) $(FT_LNK) -o $(NAME_C)
 
 clean:
 	rm -rf $(OBJDIR)
@@ -53,7 +53,7 @@ clean:
 
 fclean: clean
 	rm -rf $(NAME)
-	rm -rf $(NAME_LIB)
+	rm -rf $(NAME_C)
 	make -C $(FT) fclean
 
 re: fclean all

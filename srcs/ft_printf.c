@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 13:49:30 by mburl             #+#    #+#             */
-/*   Updated: 2019/12/04 11:57:26 by mburl            ###   ########.fr       */
+/*   Updated: 2019/12/04 14:58:42 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_type g_type[ARGS] = {
 	{'i', print_d}, {'d', print_d}, {'o', print_o}, {'u', print_u},
 	{'s', print_s}, {'x', print_x}, {'X', print_x_upper}, {'p', print_p},
 	{'f', print_f}, {'c', print_c}, {'F', print_f}, {'b', print_b},
-	{'n', print_n}
+	{'n', print_n}, {'U', print_u}
 };
 
 static void		init_flags(t_flags *flags)

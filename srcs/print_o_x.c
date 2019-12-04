@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 15:27:22 by mburl             #+#    #+#             */
-/*   Updated: 2019/12/04 12:12:52 by mburl            ###   ########.fr       */
+/*   Updated: 2019/12/04 14:54:08 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ int				print_o(t_flags *flags, va_list args)
 }
 
 static void		print_hash_key(char *hash, t_flags *flags,
-								uintmax_t nb, int size)
+								uintmax_t nb, int *size)
 {
 	if ((flags->zero && flags->hash == 1 && nb != 0 &&
 			!flags->minus && flags->type != 'p') ||
 			(flags->type == 'p' && flags->minus))
 		ft_write(hash, 2, flags);
 	if (flags->width && !flags->minus)
-		size = ft_pad(flags, size);
+		*size = ft_pad(flags, *size);
 	if ((flags->hash == 1 && nb != 0 && !flags->zero && flags->type != 'p') ||
 			(flags->type == 'p' && !flags->minus))
 		ft_write(hash, 2, flags);
@@ -72,9 +72,9 @@ int				print_x(t_flags *flags, va_list args)
 		size += 2;
 	size += (flags->precision > size) ? flags->precision - nb_size : 0;
 	size = (flags->precision > size) ? flags->precision : size;
-	print_hash_key("0x", flags, nb, size);
+	print_hash_key("0x", flags, nb, &size);
 	while (nb_size++ < flags->precision)
-		ft_write("0", 1, flags);
+		size += ft_write("0", 1, flags);
 	if (flags->precision >= 0 || nb > 0)
 		ft_putnbr_maxint_u(nb, "0123456789abcdef", 16, flags);
 	if (flags->width && flags->minus)
@@ -99,7 +99,7 @@ int				print_x_upper(t_flags *flags, va_list args)
 		size += 2;
 	size += (flags->precision > size) ? flags->precision - nb_size : 0;
 	size = (flags->precision > size) ? flags->precision : size;
-	print_hash_key("0X", flags, nb, size);
+	print_hash_key("0X", flags, nb, &size);
 	while (nb_size++ < flags->precision)
 		ft_write("0", 1, flags);
 	if (flags->precision >= 0 || nb > 0)
