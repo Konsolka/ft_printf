@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 11:37:38 by mburl             #+#    #+#             */
-/*   Updated: 2019/12/04 11:44:27 by mburl            ###   ########.fr       */
+/*   Updated: 2019/12/04 14:25:40 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,33 +52,38 @@ typedef struct	s_type
 	int		(*f)();
 }				t_type;
 
-int		ft_printf(const char * restrict format, ...);
-int		ft_pad(t_flags *flags, int size);
-int		ft_write(void *s, int size, t_flags *flags);
-int		write_untill(char **format, t_flags *flags);
-int		call_type(char **str, va_list args, t_flags *flags);
-int		handle_flags(char **str, t_flags *flags);
-int		handle_width(char **str, t_flags *flags, va_list args);
-int		handle_precision(char **str, t_flags *flags, va_list args);
-int		handle_length(char **str_c, t_flags *flags);
-int		print_o(t_flags *flags, va_list args);
-int		print_u(t_flags *flags, va_list args);
-int		print_d(t_flags *flags, va_list args);
-int		print_s(t_flags *flags, va_list args);
-int		print_x(t_flags *flags, va_list args);
-int		print_s(t_flags	*flags, va_list args);
-int		print_x_upper(t_flags *flags, va_list args);
-int		print_p(t_flags *flags, va_list args);
-int		print_f(t_flags *flags, va_list args);
-int     print_c(t_flags	*flags, va_list args);
-int		ft_write_char(char c, t_flags *flags);
-void	display_sign(intmax_t nb, t_flags *flags);
-void	get_number_size(uintmax_t nb, uintmax_t str_len, int *size);
+int			ft_printf(const char * restrict format, ...);
+int			ft_pad(t_flags *flags, int size);
+int			ft_write(void *s, int size, t_flags *flags);
+int			write_untill(char **format, t_flags *flags);
+int			call_type(char **str, va_list args, t_flags *flags);
+int			handle_flags(char **str, t_flags *flags);
+int			handle_width(char **str, t_flags *flags, va_list args);
+int			handle_precision(char **str, t_flags *flags, va_list args);
+int			handle_length(char **str_c, t_flags *flags);
+int			print_o(t_flags *flags, va_list args);
+int			print_u(t_flags *flags, va_list args);
+int			print_d(t_flags *flags, va_list args);
+int			print_s(t_flags *flags, va_list args);
+int			print_x(t_flags *flags, va_list args);
+int			print_s(t_flags	*flags, va_list args);
+int			print_x_upper(t_flags *flags, va_list args);
+int			print_p(t_flags *flags, va_list args);
+int			print_f(t_flags *flags, va_list args);
+int     	print_c(t_flags	*flags, va_list args);
+int			ft_write_char(char c, t_flags *flags);
+void		display_sign(intmax_t nb, t_flags *flags);
+void		get_number_size(uintmax_t nb, uintmax_t str_len, int *size);
 uintmax_t	get_number_u(t_flags *flags, va_list args);
-intmax_t     get_number(t_flags *flags, va_list args);
-void	ft_putnbr_maxint_u(uintmax_t nb, char *str, uintmax_t str_len, t_flags *flags);
-int		ft_pad_nb(t_flags *flags, va_list args, char *base, char *hash_key);
-int		ft_gcvt(long double f, char **s, t_flags *flags);
-int		print_n(t_flags *flags, va_list args);
-int		print_b(t_flags *flags, va_list args);
+intmax_t	get_number(t_flags *flags, va_list args);
+void		ft_putnbr_maxint_u(uintmax_t nb, char *str, uintmax_t str_len, t_flags *flags);
+int			ft_pad_nb(t_flags *flags, va_list args, char *base, char *hash_key);
+int			ft_gcvt(long double f, char **s, t_flags *flags);
+int			print_n(t_flags *flags, va_list args);
+int			print_b(t_flags *flags, va_list args);
+void		display_sign_float(long double nb, t_flags *flags);
+void		reverse(char *str, int len);
+int			ft_numlen(long double nb);
+
+
 #endif
