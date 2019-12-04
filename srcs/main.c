@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: abenton <abenton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 11:07:13 by mburl             #+#    #+#             */
-/*   Updated: 2019/12/04 14:58:13 by mburl            ###   ########.fr       */
+/*   Updated: 2019/12/04 17:25:25 by abenton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "ft_printf.h"
+#include "../includes/ft_printf.h"
 #include <float.h>
 #include <math.h>
 #include <stdint.h>
@@ -20,6 +20,6 @@
 
 int				main(void)
 {
-	printf("==%U==", 52);
+	ft_printf("%b", 42);
 	return (0);
 }
