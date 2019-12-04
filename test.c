@@ -2,6 +2,7 @@
 #include <stdlib.h>
 int		main(void)
 {
-	printf( "%+5i", 5 );
+	ft_printf("%b", 7);
+	printf("%+5i", 5 );
 	return (0);
 }
