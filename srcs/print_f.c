@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 15:13:19 by mburl             #+#    #+#             */
-/*   Updated: 2019/12/02 15:50:37 by mburl            ###   ########.fr       */
+/*   Updated: 2019/12/04 11:54:53 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 int		print_f(t_flags *flags, va_list args)
 {
-	char	*nb;
-	int		size;
-	long double	cast;
+	char			*nb;
+	int				size;
+	long double		cast;
 
 	if (flags->precision == -2)
 		flags->precision = 0;

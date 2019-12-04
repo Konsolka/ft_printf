@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 15:27:22 by mburl             #+#    #+#             */
-/*   Updated: 2019/12/04 11:05:58 by mburl            ###   ########.fr       */
+/*   Updated: 2019/12/04 11:55:44 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		print_o(t_flags *flags, va_list args)
 	size = 0;
 	nb = get_number_u(flags, args);
 	if (flags->precision >= 0 || nb > 0)
-		get_number_size(nb , 8, &size);
+		get_number_size(nb, 8, &size);
 	if (flags->hash && (nb > 0 || flags->precision < 0))
 		size += 1;
 	nb_size = size;
@@ -79,7 +79,7 @@ int		print_x(t_flags *flags, va_list args)
 
 int		print_x_upper(t_flags *flags, va_list args)
 {
-		uintmax_t	nb;
+	uintmax_t	nb;
 	int			size;
 	int			nb_size;
 	int			temp;

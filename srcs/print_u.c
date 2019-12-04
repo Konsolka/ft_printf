@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 15:30:04 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/20 15:30:11 by mburl            ###   ########.fr       */
+/*   Updated: 2019/12/04 11:56:28 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		print_u(t_flags *flags, va_list args)
 	size = 0;
 	nb = get_number_u(flags, args);
 	if (flags->precision >= 0 || nb > 0)
-		get_number_size(nb , 10, &size);
+		get_number_size(nb, 10, &size);
 	if (flags->hash && (nb > 0 || flags->precision < 0))
 		size += 1;
 	nb_size = size;

@@ -6,13 +6,13 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 17:09:24 by abenton           #+#    #+#             */
-/*   Updated: 2019/12/04 11:09:58 by mburl            ###   ########.fr       */
+/*   Updated: 2019/12/04 11:54:36 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		display_d(t_flags *flags, int size, int prec, intmax_t nb)
+int			display_d(t_flags *flags, int size, int prec, intmax_t nb)
 {
 	int		width_size;
 	int		width;
@@ -29,18 +29,19 @@ int		display_d(t_flags *flags, int size, int prec, intmax_t nb)
 		ft_write(" ", 1, flags);
 	if ((flags->width && (flags->minus || !flags->zero)) || !flags->width)
 		display_sign(nb, flags);
-		if (flags->precision == -2 && flags->width && flags->minus)
+	if (flags->precision == -2 && flags->width && flags->minus)
 		ft_write(" ", 1, flags);
 	while (width++ < prec)
 		ft_write("0", 1, flags);
-	if (size > 0 && !(nb == 0 && (flags->precision == -2)) && flags->precision != -1)
+	if (size > 0 && !(nb == 0 && (flags->precision == -2)) &&
+			flags->precision != -1)
 		ft_putnbr_maxint_u((nb < 0 ? -nb : nb), "0123456789", 10, flags);
 	return (size + width_size);
 }
 
-int		print_d(t_flags *flags, va_list args)
+int			print_d(t_flags *flags, va_list args)
 {
-	intmax_t    nb;
+	intmax_t	nb;
 	int			size;
 	int			precision;
 
@@ -86,7 +87,7 @@ void		display_padding(t_flags *flags, uintmax_t nb, int *size, char *base)
 		*size += 2;
 }
 
-int		handle_hash(t_flags *flags, uintmax_t nb, int *size, char *hash_key)
+int			handle_hash(t_flags *flags, uintmax_t nb, int *size, char *hash_key)
 {
 	int		prec;
 
@@ -101,7 +102,7 @@ int		handle_hash(t_flags *flags, uintmax_t nb, int *size, char *hash_key)
 	return (prec);
 }
 
-int		ft_pad_nb(t_flags *flags, va_list args, char *base, char *hash_key)
+int			ft_pad_nb(t_flags *flags, va_list args, char *base, char *hash_key)
 {
 	int			size;
 	uintmax_t	nb;

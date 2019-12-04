@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 12:26:39 by abenton           #+#    #+#             */
-/*   Updated: 2019/12/04 11:28:54 by mburl            ###   ########.fr       */
+/*   Updated: 2019/12/04 11:56:14 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_strndup(const char *s1, size_t n)
 	return (s2);
 }
 
-int		print_s(t_flags	*flags, va_list args)
+int		print_s(t_flags *flags, va_list args)
 {
 	char	*s;
 	int		len;

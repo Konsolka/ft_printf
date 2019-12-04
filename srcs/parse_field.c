@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 13:22:22 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/25 15:24:52 by mburl            ###   ########.fr       */
+/*   Updated: 2019/12/04 11:49:34 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		handle_flags(char **str, t_flags *flags)
 	return (1);
 }
 
-int		handle_width(char **str, t_flags *flags, va_list args) // incorrect
+int		handle_width(char **str, t_flags *flags, va_list args)
 {
 	int		width;
 
@@ -46,7 +46,7 @@ int		handle_width(char **str, t_flags *flags, va_list args) // incorrect
 		}
 		else
 			flags->width = width;
-		while (width > 0 && (*str += 1)) // %8.5i не работает
+		while (width > 0 && (*str += 1))
 			width /= 10;
 		return (1);
 	}
@@ -59,9 +59,7 @@ int		handle_precision(char **str, t_flags *flags, va_list args)
 
 	if (**str == '.')
 	{
-		*str += 1;
-		if (**str == '0')
-			*str += 1;
+		*str += (**str == '0') ? 2 : 1;
 		if (!ft_isdigit(**str) && **str != '*')
 		{
 			flags->precision = -1;
@@ -91,6 +89,7 @@ void	edit_len_type(int len_type, t_flags *flags, char **str)
 		*str += 1;
 	*str += 1;
 }
+
 int		handle_length(char **str_c, t_flags *flags)
 {
 	char *str;

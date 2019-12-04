@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 15:16:46 by mburl             #+#    #+#             */
-/*   Updated: 2019/12/04 11:13:04 by mburl            ###   ########.fr       */
+/*   Updated: 2019/12/04 11:43:14 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,21 @@
 #include <stdlib.h>
 #include "ft_printf.h"
 
-static void reverse(char *str, int len)
+static void		reverse(char *str, int len)
 {
-	int i=0, j=len-1, temp;
-	while (i<j)
+	int		i;
+	int		j;
+	int		temp;
+
+	i = 0;
+	j = len - 1;
+	while (i < j)
 	{
 		temp = str[i];
 		str[i] = str[j];
 		str[j] = temp;
-		i++; j--;
+		i++;
+		j--;
 	}
 }
 
@@ -32,7 +38,7 @@ static int		handle_inf(t_flags *flags)
 		return (3);
 }
 
-int			ft_numlen(long double nb)
+int				ft_numlen(long double nb)
 {
 	int			i;
 	uintmax_t	newnb;
@@ -48,7 +54,8 @@ int			ft_numlen(long double nb)
 	}
 	return (i);
 }
-void	display_sign_float(long double nb, t_flags *flags)
+
+static void		display_sign_float(long double nb, t_flags *flags)
 {
 	if (nb < 0.0)
 		ft_write("-", 1, flags);
@@ -58,7 +65,8 @@ void	display_sign_float(long double nb, t_flags *flags)
 		ft_write(" ", 1, flags);
 }
 
-int		ft_pad_float(char *str, int size, t_flags *flags, long double nb)
+static int		ft_pad_float(char *str, int size,
+							t_flags *flags, long double nb)
 {
 	int		width_size;
 	int		width;
@@ -92,11 +100,13 @@ int			ft_gcvt(long double f, char **s, t_flags *flags)
 		return (handle_inf(flags));
 	j = 0;
 	sign = 0;
-	if (f < 0.0) {
-	    sign = 1;
-	    f = -f;
+	if (f < 0.0)
+	{
+		sign = 1;
+		f = -f;
 	}
-	size = ft_numlen(f) + flags->precision + 1 - ((flags->precision || flags->hash) ? 0 : 1) +
+	size = ft_numlen(f) + flags->precision + 1 -
+		((flags->precision || flags->hash) ? 0 : 1) +
 		((sign) ? 1 : 0) + (!sign && (flags->plus || flags->space));
 	buf = ft_strnew(size);
 	scal = 1.0;
@@ -108,38 +118,39 @@ int			ft_gcvt(long double f, char **s, t_flags *flags)
 	if (!f)
 	{
 		i = 0;
-	    while (i++ < flags->precision)
+		while (i++ < flags->precision)
 			buf[j++] = '0';
-	    if (flags->precision > 0 || flags->hash == 1)
-	        buf[j++] = '.';
-	    buf[j++] = '0';
-	    buf[size] = 0;
+		if (flags->precision > 0 || flags->hash == 1)
+			buf[j++] = '.';
+		buf[j++] = '0';
+		buf[size] = 0;
 	}
-	else 
+	else
 	{
-	    i = 1;
-	    if (flags->precision > 0)
+		i = 1;
+		if (flags->precision > 0)
 		{
-	        t = f2 * scal;
-	        z = (uintmax_t)(t + 0.5);
-	        for (i = 0; i < flags->precision; i++)
+			t = f2 * scal;
+			z = (uintmax_t)(t + 0.5);
+			i = 0;
+			while (i < flags->precision)
 			{
-	            buf[j++] = '0' + (z % 10);
-	            z /= 10;
-	        }
-	    }
+				buf[j++] = '0' + (z % 10);
+				z /= 10;
+				i++;
+			}
+		}
 		if (flags->hash == 1 || flags->precision > 0)
 			buf[j++] = '.';
-	    do
+		do
 		{
 			buf[j++] = '0' + (k % 10);
-	        k /= 10;
-	    } while (k);
+			k /= 10;
+		}
+		while (k);
 	}
 	reverse(buf, ft_strlen(buf));
-	// printf("--size = %i--", ft_numlen(f) + flags->precision + 1 - ((flags->precision) ? 0 : 1));
 	size = ft_pad_float(buf, size, flags, ((sign) ? -f : f));
-	
 	size = (flags->minus) ? ft_pad(flags, size) : size;
 	*s = buf;
 	return (size);

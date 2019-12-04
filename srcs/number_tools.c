@@ -6,16 +6,16 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 15:31:08 by mburl             #+#    #+#             */
-/*   Updated: 2019/11/20 15:34:38 by mburl            ###   ########.fr       */
+/*   Updated: 2019/12/04 11:48:11 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-intmax_t     get_number(t_flags *flags, va_list args)
+intmax_t		get_number(t_flags *flags, va_list args)
 {
-	intmax_t    num;
-   
+	intmax_t	num;
+
 	num = va_arg(args, intmax_t);
 	if (flags->length == LEN_TYPE_HH)
 		num = (signed char)num;
@@ -34,11 +34,10 @@ intmax_t     get_number(t_flags *flags, va_list args)
 	return (num);
 }
 
-uintmax_t	get_number_u(t_flags *flags, va_list args)
+uintmax_t		get_number_u(t_flags *flags, va_list args)
 {
-	uintmax_t    num;
+	uintmax_t	num;
 
-// need to add va_list args to structure
 	num = va_arg(args, uintmax_t);
 	if (flags->length == LEN_TYPE_HH)
 		num = (unsigned char)num;
@@ -57,7 +56,7 @@ uintmax_t	get_number_u(t_flags *flags, va_list args)
 	return (num);
 }
 
-void	get_number_size(uintmax_t nb, uintmax_t str_len, int *size)
+void			get_number_size(uintmax_t nb, uintmax_t str_len, int *size)
 {
 	*size += 1;
 	while (nb >= str_len)
@@ -66,7 +65,8 @@ void	get_number_size(uintmax_t nb, uintmax_t str_len, int *size)
 		*size += 1;
 	}
 }
-void	display_sign(intmax_t nb, t_flags *flags)
+
+void			display_sign(intmax_t nb, t_flags *flags)
 {
 	if (nb < 0)
 		ft_write("-", 1, flags);
@@ -76,7 +76,8 @@ void	display_sign(intmax_t nb, t_flags *flags)
 		ft_write(" ", 1, flags);
 }
 
-void	ft_putnbr_maxint_u(uintmax_t nb, char *str, uintmax_t str_len, t_flags *flags)
+void			ft_putnbr_maxint_u(uintmax_t nb, char *str,
+								uintmax_t str_len, t_flags *flags)
 {
 	if (nb >= str_len)
 		ft_putnbr_maxint_u(nb / str_len, str, str_len, flags);

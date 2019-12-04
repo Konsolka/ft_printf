@@ -6,15 +6,15 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 12:51:14 by abenton           #+#    #+#             */
-/*   Updated: 2019/12/04 11:21:04 by mburl            ###   ########.fr       */
+/*   Updated: 2019/12/04 11:52:11 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int         print_n(t_flags *flags, va_list args)
+int				print_n(t_flags *flags, va_list args)
 {
-	int     *n;
+	int		*n;
 
 	n = va_arg(args, int*);
 	*n = flags->byte_total;
@@ -22,8 +22,9 @@ int         print_n(t_flags *flags, va_list args)
 }
 
 /*
-	длина чсила в двоичном виде
+**	длина чсила в двоичном виде
 */
+
 static int		ft_nbr_len(intmax_t nbr, int base)
 {
 	int		i;
@@ -39,11 +40,16 @@ static int		ft_nbr_len(intmax_t nbr, int base)
 	return (i);
 }
 
-int			print_b(t_flags *flags, va_list args)
+/*
+**	nbr_len - number length
+**	len - string length
+*/
+
+int				print_b(t_flags *flags, va_list args)
 {
-	intmax_t 	nbr;
-	int			nbr_len; // длина числа в двоичном виде
-	int			len; // длина всего
+	intmax_t	nbr;
+	int			nbr_len;
+	int			len;
 
 	if (flags->precision != 0)
 		flags->zero = 0;
