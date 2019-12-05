@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: abenton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/22 11:07:13 by mburl             #+#    #+#             */
-/*   Updated: 2019/12/05 10:09:10 by mburl            ###   ########.fr       */
+/*   Created: 2019/12/04 16:27:47 by abenton           #+#    #+#             */
+/*   Updated: 2019/12/04 16:28:16 by abenton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "ft_printf.h"
-#include <float.h>
-#include <math.h>
-#include <stdint.h>
-#include <inttypes.h>
-#include <string.h>
+#include <stdlib.h>
 
-int				main(void)
+int		main(void)
 {
-	ft_printf("%zhd", 4294967296);
-	printf("%zhd", 4294967296);
+	ft_printf("%b", 7);
+	printf("%+5i", 5);
 	return (0);
 }
