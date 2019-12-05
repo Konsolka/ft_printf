@@ -22,7 +22,7 @@ OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))
 # ft library
 FT		= ./libft/
 FT_LIB	= $(addprefix $(FT),libft.a)
-FT_INC	= -I ./libft
+FT_INC	= -I ./libft/includes
 FT_LNK	= -L ./libft -lft
 
 
@@ -32,13 +32,13 @@ obj:
 	mkdir -p $(OBJDIR)
 
 $(OBJDIR)%.o:$(SRCDIR)%.c
-	$(CC) -g $(CFLAGS) $(FT_INC) -I $(INCDIR) -o $@ -c $<
+	@$(CC) -g $(CFLAGS) $(FT_INC) -I $(INCDIR) -o $@ -c $<
 
 $(FT_LIB):
 	make -C $(FT)
 
 $(NAME): $(OBJ)
-	cp libft/libft.a ./$(NAME)
+	@cp libft/libft.a ./$(NAME)
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
 

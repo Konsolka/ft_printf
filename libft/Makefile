@@ -6,15 +6,20 @@
 #    By: mburl <mburl@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/04 19:30:25 by mburl             #+#    #+#              #
-#    Updated: 2019/12/04 12:54:06 by mburl            ###   ########.fr        #
+#    Updated: 2019/12/05 09:50:52 by mburl            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+NAME	= libft.a
 
-INCLUDES = ./
-NAME = libft.a
+INCDIR	= ./includes/
+SRCSDIR	= ./srcs/
+OBJDIR	= ./obj/
 
-SRCS = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
+CC		= gcc
+CFLAGS	= -Wall -Wextra -Werror
+
+SRCS	= ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 	  ft_isdigit.c ft_islower.c ft_isprint.c ft_isupper.c ft_memalloc.c \
 	  ft_memccpy.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memdel.c \
 	  ft_memmove.c ft_memset.c ft_strcat.c ft_strchr.c ft_strclr.c \
@@ -29,20 +34,22 @@ SRCS = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 	  ft_strsplit.c ft_strnch.c ft_intlen.c ft_countwords.c ft_chrcmp.c \
 	  ft_putstr_err.c ft_lstcount.c ft_lstrev.c get_next_line.c ft_pow.c
 
-OBJJ = $(SRCS:.c=.o)
+OBJ		= $(addprefix $(OBJDIR),$(SRCS:.c=.o))
 
+all: obj $(NAME)
 
-.PHONY: all clean fclean re
+obj:
+	mkdir -p $(OBJDIR)
 
-all: $(NAME)
+$(OBJDIR)%.o:$(SRCSDIR)%.c
+	@$(CC) $(CFLAGS) -I $(INCDIR) -o $@ -c $<
 
-$(NAME): $(SRCS) libft.h
-	@gcc -Wall -Wextra -Werror -I$(INCLUDES) -c $(SRCS)
-	@ar rc $(NAME) $(OBJJ)
+$(NAME): $(OBJ)
+	ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
 
 clean:
-	@/bin/rm -f $(OBJJ)
+	@rm -rf $(OBJDIR)
 
 fclean: clean
 	@/bin/rm -f $(NAME)

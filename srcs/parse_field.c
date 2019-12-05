@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 13:22:22 by mburl             #+#    #+#             */
-/*   Updated: 2019/12/04 14:32:28 by mburl            ###   ########.fr       */
+/*   Updated: 2019/12/05 10:02:11 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,12 @@ int		handle_length(char **str_c, t_flags *flags)
 		edit_len_type(LEN_TYPE_H, flags, str_c);
 	else if (str[0] == 'l' && str[1] == 'l')
 		edit_len_type(LEN_TYPE_LL, flags, str_c);
+	else if (str[0] == 'j')
+		edit_len_type(LEN_TYPE_J, flags, str_c);
 	else if (str[0] == 'l')
 		edit_len_type(LEN_TYPE_L, flags, str_c);
 	else if (str[0] == 'L')
 		edit_len_type(LEN_TYPE_L_LAR, flags, str_c);
-	else if (str[0] == 't')
-		edit_len_type(LEN_TYPE_J, flags, str_c);
 	else if (str[0] == 'z')
 		edit_len_type(LEN_TYPE_Z, flags, str_c);
 	else

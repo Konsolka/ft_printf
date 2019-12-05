@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 17:09:24 by abenton           #+#    #+#             */
-/*   Updated: 2019/12/04 11:54:36 by mburl            ###   ########.fr       */
+/*   Updated: 2019/12/05 09:55:33 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,12 @@ int			display_d(t_flags *flags, int size, int prec, intmax_t nb)
 			display_sign(nb, flags);
 		width_size = ft_pad(flags, size) - size;
 	}
-	if (flags->precision == -2 && flags->width && !flags->minus)
-		ft_write(" ", 1, flags);
 	if ((flags->width && (flags->minus || !flags->zero)) || !flags->width)
 		display_sign(nb, flags);
-	if (flags->precision == -2 && flags->width && flags->minus)
-		ft_write(" ", 1, flags);
 	while (width++ < prec)
 		ft_write("0", 1, flags);
-	if (size > 0 && !(nb == 0 && (flags->precision == -2)) &&
-			flags->precision != -1)
+	if ((size > 0 && nb != 0) ||
+		(nb == 0 && (flags->precision != -2 && flags->precision != -1)))
 		ft_putnbr_maxint_u((nb < 0 ? -nb : nb), "0123456789", 10, flags);
 	return (size + width_size);
 }
@@ -50,9 +46,10 @@ int			print_d(t_flags *flags, va_list args)
 	nb = get_number(flags, args);
 	size = 0;
 	get_number_size((uintmax_t)(nb < 0 ? -nb : nb), 10, &size);
-	precision = flags->precision - size;
+	precision = (flags->precision > 0) ? flags->precision - size : 0;
+	size = ((flags->precision == -1 || flags->precision == -2)
+			&& nb == 0) ? 0 : size;
 	size = (flags->precision > size) ? flags->precision : size;
-	size = (flags->precision == -1 && nb == 0) ? 0 : size;
 	size += (nb >= 0 && (flags->plus || flags->space));
 	if (nb < 0)
 		size++;
