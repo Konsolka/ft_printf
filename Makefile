@@ -10,7 +10,7 @@ OBJDIR	= ./obj/
 
 # compiler
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra 
 
 # src / obj files
 SRC		= main.c fields.c float_tools.c print_f.c ft_printf.c number_tools.c parse_field.c \
