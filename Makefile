@@ -1,5 +1,4 @@
 NAME	= libftprintf.a
-NAME_C = libftprintf
 
 LIBFT	= libft
 
@@ -10,10 +9,10 @@ OBJDIR	= ./obj/
 
 # compiler
 CC		= gcc
-CFLAGS	= -Wall -Wextra 
+CFLAGS	= -Wall -Wextra -Werror 
 
 # src / obj files
-SRC		= main.c fields.c float_tools.c print_f.c ft_printf.c number_tools.c parse_field.c \
+SRC		= fields.c float_tools.c print_f.c ft_printf.c number_tools.c parse_field.c \
 			print_d.c print_o_x.c print_p.c print_s.c print_u.c print_c.c print_bonus.c \
 			float_misc.c
 
@@ -35,17 +34,12 @@ $(OBJDIR)%.o:$(SRCDIR)%.c
 	@$(CC) $(CFLAGS) $(FT_INC) -I $(INCDIR) -o $@ -c $<
 
 $(FT_LIB):
-	make -C $(FT)
+	@make -C $(FT)
 
 $(NAME): $(OBJ)
 	@cp libft/libft.a ./$(NAME)
 	@ar rc $(NAME) $(OBJ)
-	@ranlib $(NAME)
-
-c: obj $(FT_LIB) $(NAME_C)
-
-$(NAME_C): $(OBJ)
-	$(CC) -g $(OBJ) $(FT_LNK) -o $(NAME_C)
+	ranlib $(NAME)
 
 clean:
 	rm -rf $(OBJDIR)
@@ -53,7 +47,6 @@ clean:
 
 fclean: clean
 	rm -rf $(NAME)
-	rm -rf $(NAME_C)
 	make -C $(FT) fclean
 
 re: fclean all

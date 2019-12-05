@@ -6,7 +6,7 @@
 #    By: mburl <mburl@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/04 19:30:25 by mburl             #+#    #+#              #
-#    Updated: 2019/12/05 09:50:52 by mburl            ###   ########.fr        #
+#    Updated: 2019/12/05 11:33:50 by mburl            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,8 +45,8 @@ $(OBJDIR)%.o:$(SRCSDIR)%.c
 	@$(CC) $(CFLAGS) -I $(INCDIR) -o $@ -c $<
 
 $(NAME): $(OBJ)
-	ar rc $(NAME) $(OBJ)
-	@ranlib $(NAME)
+	@ar rc $(NAME) $(OBJ)
+	ranlib $(NAME)
 
 clean:
 	@rm -rf $(OBJDIR)
