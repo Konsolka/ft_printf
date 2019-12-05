@@ -10,7 +10,7 @@ OBJDIR	= ./obj/
 
 # compiler
 CC		= gcc
-CFLAGS	= -Wall -Wextra -g
+CFLAGS	= -Wall -Wextra -Werror
 
 # src / obj files
 SRC		= main.c fields.c float_tools.c print_f.c ft_printf.c number_tools.c parse_field.c \
@@ -32,7 +32,7 @@ obj:
 	mkdir -p $(OBJDIR)
 
 $(OBJDIR)%.o:$(SRCDIR)%.c
-	@$(CC) -g $(CFLAGS) $(FT_INC) -I $(INCDIR) -o $@ -c $<
+	@$(CC) $(CFLAGS) $(FT_INC) -I $(INCDIR) -o $@ -c $<
 
 $(FT_LIB):
 	make -C $(FT)

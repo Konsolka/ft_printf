@@ -6,7 +6,7 @@
 /*   By: mburl <mburl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 17:09:24 by abenton           #+#    #+#             */
-/*   Updated: 2019/12/05 09:55:33 by mburl            ###   ########.fr       */
+/*   Updated: 2019/12/05 10:12:57 by mburl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int			print_d(t_flags *flags, va_list args)
 	return (size);
 }
 
-void		display_padding(t_flags *flags, uintmax_t nb, int *size, char *base)
+void		display_padding(t_flags *flags, int *size)
 {
 	int		width;
 	int		prec;
@@ -113,7 +113,7 @@ int			ft_pad_nb(t_flags *flags, va_list args, char *base, char *hash_key)
 	prec = handle_hash(flags, nb, &size, hash_key);
 	if (flags->precision == -1 && !nb)
 		size = 0;
-	display_padding(flags, nb, &size, base);
+	display_padding(flags, &size);
 	if (flags->hash && flags->width && !flags->minus && !flags->zero &&
 			!prec)
 		ft_write(hash_key, (int)ft_strlen(hash_key), flags);
